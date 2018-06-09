@@ -20,7 +20,7 @@ if($res->num_rows > 0){
     if($r[2] == "Admin"){
         header('Location:admin/dashboard.php');
     }elseif ($r[2] == "Service Provider"){
-        header('Location:localhost:8080/sp');
+        header('Location: //localhost:8080/ServiceProvider/dashboard.jsp?username='. $_SESSION['username']);
     }elseif ($r[2] == "Client"){
         header('Location:NODE');
     }else{
