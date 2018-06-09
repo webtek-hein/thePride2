@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Home | CarGo CarIn</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="/gen/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/gen/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/gen/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="/gen/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/gen/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/index" class="navbar-brand"><b>CarGo</b>CarIn</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+      </div>
+    </nav>
+  </header>
+  <div class="content-wrapper">
+    <div class="container">
+     <section class="content-header">
+<form action="/carFind" method="POST">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Find available cars in the market</h3>
+            </div>
+            
+              <div class="box-body">
+                <div class="form-group">
+                  <label form="pickup" class="col-sm-2 control-label">Pick-up</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="pickup_location" name="pickup_location" placeholder="Location">
+                  </div>
+                  <label form="pickup_date" class="col-sm-2 control-label">Pickup Date</label>
+                  <div class="col-sm-4">
+                    <input type="date" class="form-control" name="pickup_date" id="pickup_date"> 
+                  </div>
+                  <div class="bootstrap-timepicker ">
+                    <div class="form-group col-sm-4">
+                      <label>Pickup time</label>
+                      <div class="input-group">
+                        <input type="text" id="pickup_time" name="pickup_time" class="form-control timepicker">
+                        <div class="input-group-addon">
+                          <i class="fa fa-clock-o"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <label form="dropoff" class="col-sm-2 control-label">Drop-off</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="dropoff_location" name="dropoff_location" placeholder="Location">
+                  </div>
+                    <label form="dropoff_date" class="col-sm-2 control-label">Dropoff date</label>
+                    <div class="col-sm-4">
+                      <input type="date" class="form-control" name="dropoff_date" id="dropoff_date">
+                    </div>
+                        <div class="bootstrap-timepicker ">
+                    <div class="form-group col-sm-4">
+                      <label>Dropoff time</label>
+                      <div class="input-group">
+                        <input type="text" id="dropoff_time" name="dropoff_time" class="form-control timepicker">
+                        <div class="input-group-addon">
+                          <i class="fa fa-clock-o"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                   <div class="form-group">
+                  <label form="price_range" class="col-sm-2 control-label">Price range</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="price_range" name="price_range" placeholder="Price Range">
+                  </div>
+                 </div>
+                </div> 
+              </div>
+              <div class="box-footer">
+                <button type="submit" class="btn btn-info">Find</button>
+                </div>  
+          </div> 
+          
+          </div>   
+          </form> 
+      </section>
+    </div>
+  </div>
+  <footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        Raoul and friends.
+      </div>
+      <strong>Copyright &copy; 2018 Group 3.</strong> All rights
+      reserved.
+    </div>
+  </footer>
+</div>
+<script src="/gen/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/gen/bootstrap/js/bootstrap.min.js"></script>
+<script src="/gen/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="/gen/dist/js/app.min.js"></script>
+<script src="/gen/dist/js/demo.js"></script>
+<script>
+  $(function () {
+    $(".timepicker").timepicker({
+      showInputs: false
+    });
+  });
+</script>
+</body>
+</html>
