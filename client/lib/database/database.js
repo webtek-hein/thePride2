@@ -9,6 +9,6 @@ module.exports = {
         password: config.get('mysql.password')
     },
     database: config.get('mysql.database'),
-    user_table: 'webteklab'
+    user_table: 'webtek'
     
 };
