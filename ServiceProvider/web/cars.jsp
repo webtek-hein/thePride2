@@ -90,7 +90,7 @@
                                             <th>Color</th>
                                             <th>Plate</th>
                                             <th>Mileage</th>
-                                            <th>Provider</th>
+                                            <th>Status</th>
                                         </thead>
                                         <tbody>
                                             <%
@@ -115,7 +115,6 @@
                                                         out.println("</td><td>" + rs.getString("licensePlate"));
                                                         out.println("</td><td>" + rs.getString("currentMileage"));
                                                         out.println("</td><td>" + rs.getString("vehicleStatus"));
-                                                        out.println("</td><td>" + rs.getString("firstname"));
                                                         
                                                     }
                                                 }
