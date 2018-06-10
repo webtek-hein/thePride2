@@ -3,11 +3,14 @@
 
 require 'admin/db.php';
 session_start();
+
+
+
 $user = $_POST['username'];
 $pass = $_POST['password'];
 
 
-$sql = "SELECT username,password,acc_Type FROM user WHERE username = ? AND password = ?";
+$sql = "SELECT username,password,acctype,user_Id FROM user WHERE username = ? AND password = ?";
 $st = $conn->prepare($sql);
 $st->bind_param('ss',$user,$pass);
 $st->execute();
@@ -17,10 +20,11 @@ $r = $res->fetch_row();
 if($res->num_rows > 0){
     $_SESSION['username'] = $user;
     $_SESSION['userType'] = $r[2];
+    $_SESSION['id'] = $r[2];
     if($r[2] == "Admin"){
         header('Location:admin/dashboard.php');
     }elseif ($r[2] == "Service Provider"){
-        header('Location: //localhost:8080/ServiceProvider/dashboard.jsp?username='. $_SESSION['username']);
+        header('Location: //localhost:8080/ServiceProvider/dashboard.jsp?ayd='. $r[3]);
     }elseif ($r[2] == "Client"){
         header('Location:NODE');
     }else{

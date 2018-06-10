@@ -2,6 +2,15 @@
 session_start();
 
 if(isset($_SESSION['username'])){
+    if($_SESSION['userType'] == "Admin"){
+        header('Location:admin/dashboard.php');
+    }elseif ($_SESSION['userType'] == "Service Provider"){
+        header('Location: //localhost:8080/ServiceProvider/dashboard.jsp');
+    }elseif ($_SESSION['userType'] == "Client"){
+        header('Location:NODE');
+    }else{
+
+    }
 }
 ?>
 
