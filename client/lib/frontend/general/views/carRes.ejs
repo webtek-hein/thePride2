@@ -27,50 +27,50 @@
     </nav>
   </header>
   <div class="content-wrapper">
-    <div class="container">
-     <section class="content-header">
-        <div class="col-md-5 col-sm-6 col-xs-12">
+
+     
+       <div class="container">
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="info-box">
             <div class="info-box-content">
-
-             <% if (Specs.newCar == 0){ %>
-                <% } else { %>
-                  <% Specs.forEach(function(carSpecs) { %>
               <span class="info-box-number">Pickup: </span> <br>
-              <span class="info-box-text">Location: <%= carSpecs.pickup_location %> </span><br>
-              <span class="info-box-text">Date: <%= carSpecs.pickup_date %> </span><br>
-              <span class="info-box-text">Time: <%= carSpecs.pickup_time %> </span><br>
+              <span class="info-box-text">Location: <%= reservation.pickUpLocation %> </span><br>
+              <span class="info-box-text">Pickup Date: <%= reservation.pickupDate %> </span><br>
+              <span class="info-box-text">Dropoff Date: <%= reservation.dropOffDate %> </span><br>
             </div>
           </div>
         </div>
-          <div class="col-md-5 col-sm-6 col-xs-12">
+      </div>
+       <div class="container">
+          <% if(Specs.length !== 0){
+            Specs.forEach(function(specs){ %>
+        <div class="col-md-6 col-sm-6 col-xs-6">
           <div class="info-box">
             <div class="info-box-content">
-              <span class="info-box-number">Dropoff: </span> <br>
-              <span class="info-box-text">Location: <%= carSpecs.dropoff_location %> </span><br>
-              <span class="info-box-text">Date: <%= carSpecs.dropoff_date %></span><br>
-              <span class="info-box-text">Time: <%= carSpecs.dropoff_time %></span><br>
-          </div> 
-          </div>
-          </div>
-          <div class="info-box">
-           <img src="/gen/images/car1.jpg" alt="car" height="150" width="250">
-            <div class="info-box-content">
-              <span class="info-box-text">Brand:<%=carSpecs.brand %></span><br>
-              <span class="info-box-text">Model:<%=carSpecs.model %> </span> <br>
-              <span class="info-box-text">Year:<%=carSpecs.year %> </span> <br>
-              <span class="info-box-text">Capacity:<%=carSpecs.capacity %> </span> <br>
-              <span class="info-box-text">Car type:<%=carSpecs.car_type %> </span> <br>
-              <span class="info-box-text">Car type:<%=carSpecs.color %></span><br>
-              <span class="info-box-text">Price:<%=carSpecs.rent_price %> </span><br>
+              <h1> <%=specs.brand%> <%=specs.model%> </h1> 
+              <img src="/gen/images/car1.jpg" alt="car" height="150" width="250">
+              <h4> Vehicle Information </h4> 
+              <p class="">Owner: <%=specs.firstname%> <%=specs.lastname%></p>
+              <p class="">Year: <%=specs.year%></p>
+              <p class="">Capacity: <%=specs.capacity%></p> 
+              <p class="">Price: <%=specs.rent_Price%></p>
+              <span class="">Car type: <%=specs.carType%></span> <br>
               <span class="info-box-text"><a href="/driverinfo"><button class="btn btn-primary">Reserve</button></a></span>
-            </div> 
-          </div> 
-          <% }) %>
-            <% } %>
-        </div> 
+          </div>
         </div>
-      </section>
+            </div> 
+          <%})}else{%>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="info-box">
+            <div class="info-box-content">
+                <h1><small>No cars found. Find <a href="/index">again</a>.</small></h1>
+            </div>
+          </div>
+        </div>
+        <%}%>
+        </div>
+        </div> 
+
     </div>
   </div>
   <footer class="main-footer">

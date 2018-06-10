@@ -127,40 +127,40 @@ module.exports = function (app, passport) {
 
     app.post('/carFind', function (req, res) {
 
-        console.log(req.body.pickup_location);
-        console.log(req.body.pickup_date);
-        console.log(req.body.pickup_time);
-        console.log(req.body.dropoff_location);
-        console.log(req.body.dropoff_date);
-        console.log(req.body.dropoff_time);
-        console.log(req.body.price_range);
+        var priceRange = req.body.priceRange;
+        var location = req.body.location;
+        var capacity = req.body.capacity;
+        
+        var rendData = {
+            pickUpLocation : location,
+            pickupDate : req.body.rentDate,
+            dropOffDate : req.body.dropoffDate,
+        }
 
-        var query_string = "INSERT INTO findcar (pickup_locationfc, pickup_datefc, pickup_timefc, dropoff_locationfc, dropoff_datefc, dropoff_timefc, price_rangefc) VALUES(?,?,?,?,?,?,?)"
 
-        connection.query(query_string, [req.body.pickup_location, req.body.pickup_date, req.body.pickup_time, req.body.dropoff_location, req.body.dropoff_date, req.body.dropoff_time, req.body.price_range], function (err, rows) {
-            if (err) {
-                console.log(err);
-            } else {
-                var query_string = "SELECT * FROM findcar f1 JOIN vehicle v1 on f1.pickup_locationfc = v1.pickup_location AND f1.price_rangefc = v1.rent_price"
-                connection.query(query_string, function (err, pCar) {
+        // var query_string = "INSERT INTO findcar (pickup_locationfc, pickup_datefc, pickup_timefc, dropoff_locationfc, dropoff_datefc, dropoff_timefc, price_rangefc) VALUES(?,?,?,?,?,?,?)"
+
+        // connection.query(query_string, [req.body.pickup_location, req.body.pickup_date, req.body.pickup_time, req.body.dropoff_location, req.body.dropoff_date, req.body.dropoff_time, req.body.price_range], function (err, rows) {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+                var query_string = `SELECT address,firstname,lastname,vehicle.* FROM vehicle 
+                    inner join user on user.user_Id = vehicle.spID
+                    where vehicleStatus = 'available'
+                    AND address = ? AND capacity <= ?
+                    AND rent_Price <= ?`;
+                connection.query(query_string,[location,capacity,priceRange], function (err, pCar) {
 
                     var newCar = pCar.length;
-                    var carsize = 10;
-
                     var Specs = [];
-                    var carlist = [];
-                    var cararray = [];
 
                     for (var i = 0; i < newCar; i++) {
                         Specs.push(pCar[i]);
-
-
-
                     }
-                    res.render('../../frontend/general/views/carRes.ejs', { Specs: Specs });
+                    res.render('../../frontend/general/views/carRes.ejs', {reservation: rendData, Specs: Specs });
                 });
-            }
-        });
+            // }
+        // });
     });
 };
 

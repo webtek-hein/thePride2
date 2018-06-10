@@ -38,56 +38,38 @@
             </div>
             
               <div class="box-body">
-                <div class="form-group">
-                  <label form="pickup" class="col-sm-2 control-label">Pick-up</label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" id="pickup_location" name="pickup_location" placeholder="Location">
+                <div class="form-group row">
+                  <label form="pickup" class="col-sm-2 control-label">Location</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="pickup_location" name="location" placeholder="Location">
                   </div>
+                </div>
+                <div class="form-group row">
                   <label form="pickup_date" class="col-sm-2 control-label">Pickup Date</label>
-                  <div class="col-sm-4">
-                    <input type="date" class="form-control" name="pickup_date" id="pickup_date"> 
+                  <div class="col-sm-3">
+                    <input type="date" class="form-control" name="rentDate" id="pickup_date"> 
                   </div>
-                  <div class="bootstrap-timepicker ">
-                    <div class="form-group col-sm-4">
-                      <label>Pickup time</label>
-                      <div class="input-group">
-                        <input type="text" id="pickup_time" name="pickup_time" class="form-control timepicker">
-                        <div class="input-group-addon">
-                          <i class="fa fa-clock-o"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <label form="dropoff" class="col-sm-2 control-label">Drop-off</label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" id="dropoff_location" name="dropoff_location" placeholder="Location">
-                  </div>
+                  
                     <label form="dropoff_date" class="col-sm-2 control-label">Dropoff date</label>
-                    <div class="col-sm-4">
-                      <input type="date" class="form-control" name="dropoff_date" id="dropoff_date">
-                    </div>
-                        <div class="bootstrap-timepicker ">
-                    <div class="form-group col-sm-4">
-                      <label>Dropoff time</label>
-                      <div class="input-group">
-                        <input type="text" id="dropoff_time" name="dropoff_time" class="form-control timepicker">
-                        <div class="input-group-addon">
-                          <i class="fa fa-clock-o"></i>
-                        </div>
-                      </div>
+                    <div class="col-sm-3">
+                      <input type="date" class="form-control" name="dropoffDate" id="dropoff_date">
                     </div>
                   </div>
-                   <div class="form-group">
-                  <label form="price_range" class="col-sm-2 control-label">Price range</label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" id="price_range" name="price_range" placeholder="Price Range">
-                  </div>
-                 </div>
+                <div class="form-group row">
+                    <label form="dropoff_date" class="col-sm-2 control-label">Price Range</label>
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control" name="priceRange" id="priceRange">
+                    </div>  
+                    <label form="dropoff_date" class="col-sm-2 control-label">Capacity</label>
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control" name="capacity" id="cap">
+                    </div> 
+                </div>
                 </div> 
-              </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-info">Find</button>
                 </div>  
+              </div>
           </div> 
           
           </div>   

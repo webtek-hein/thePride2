@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 09, 2018 at 03:41 PM
+-- Generation Time: Jun 10, 2018 at 11:11 AM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -21,21 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `webtech`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `contact_details`
---
-
-DROP TABLE IF EXISTS `contact_details`;
-CREATE TABLE IF NOT EXISTS `contact_details` (
-  `idcontact_details` int(11) NOT NULL AUTO_INCREMENT,
-  `contactFirstname` varchar(45) DEFAULT NULL,
-  `contactLastname` varchar(45) DEFAULT NULL,
-  `contactNumber` int(12) DEFAULT NULL,
-  PRIMARY KEY (`idcontact_details`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE DATABASE IF NOT EXISTS `webtech` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `webtech`;
 
 -- --------------------------------------------------------
 
@@ -52,20 +39,18 @@ CREATE TABLE IF NOT EXISTS `request` (
   `status` varchar(50) NOT NULL,
   `rentStartdate` date DEFAULT NULL,
   `rentEnddate` date DEFAULT NULL,
-  `contactID` int(11) DEFAULT NULL,
   PRIMARY KEY (`requestID`),
   KEY `vehicle_Id` (`vehicleID`) USING BTREE,
-  KEY `user_Id` (`userID`) USING BTREE,
-  KEY `r_contactDetails_idx` (`contactID`)
+  KEY `user_Id` (`userID`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `request`
 --
 
-INSERT INTO `request` (`requestID`, `userID`, `vehicleID`, `requestType`, `status`, `rentStartdate`, `rentEnddate`, `contactID`) VALUES
-(3, 3, 3, 'rent', 'approved', '0000-00-00', '0000-00-00', NULL),
-(4, 4, 2, 'rent', 'approved', '0000-00-00', '0000-00-00', NULL);
+INSERT INTO `request` (`requestID`, `userID`, `vehicleID`, `requestType`, `status`, `rentStartdate`, `rentEnddate`) VALUES
+(3, 3, 3, 'rent', 'approved', '0000-00-00', '0000-00-00'),
+(4, 4, 2, 'rent', 'approved', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -109,19 +94,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_Id`, `firstname`, `lastname`, `address`, `contact_No`, `acctype`, `username`, `password`, `status`) VALUES
-(0, 'Raoul', 'Madayag', 'Baguio ', 123213, 'Admin', 'Admin', 'admin', 'activated'),
-(1, 'Justin', 'Gutierrez', 'Ilocos', 234324, 'Client', 'manghustino', 'hustino123', 'deactivated'),
-(3, 'Allen', 'Batac', 'Baguio', 432345234, 'Service Provider', 'emoji30', 'allen0984', 'activated'),
-(4, 'Iris', 'Quiming', 'Pangasinan', 9864455, 'Client', 'mciq', 'zoldyck2', 'declined'),
-(5, 'Kevin', 'Orian', 'Pampanga', 3243265, 'Client', 'kevs', 'kevs222', 'declined'),
-(6, 'Julian', 'Jose', 'Baguio', 111111, 'Service Provider', 'jj47', 'juliaknows', 'activated'),
-(7, 'Kirk', 'Tade', 'Baguio', 3243432, 'Client', 'kirk', 'kirkbb', 'deactivated'),
-(8, 'Iyar', 'Benitez', 'Baguio', 2147483647, 'Service Provider', 'iyar88', 'iyar123', 'activated'),
-(9, 'Jed', 'Benitez', 'Baguio', 123123123, 'Client', 'jed88', 'jed123', 'approved'),
-(10, 'Paul', 'Sam', 'Baguio', 2147483647, 'Service Provider', 'sam123', 'sam123', 'activated'),
-(11, 'Caim', 'Drake', 'Baguio', 11111111, 'Client', 'Caim1', 'caim1', 'approved'),
-(12, 'Francisco', 'Cacas', 'Baguio', 909190919, 'Service Provider', 'Francis11', 'francis123', 'pending'),
-(13, 'bin', 'bini', 'baguio', 101010101, 'Admin', 'bin11', 'bin123', 'pending');
+(0, 'Raoul', 'Madayag', 'Baguio ', 123213, 'Admin', 'admin', 'admin', 'activated'),
+(1, 'Allen', 'Batac', 'Baguio', 432345234, 'Service Provider', 'sp', 'sp', 'activated'),
+(2, 'Iris', 'Quiming', 'Pangasinan', 9864455, 'Client', 'client', 'client', 'activated');
 
 -- --------------------------------------------------------
 
@@ -142,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `vehicle` (
   `licensePlate` varchar(50) NOT NULL,
   `currentMileage` varchar(50) NOT NULL,
   `vehicleStatus` varchar(45) NOT NULL DEFAULT 'undefined',
-  `photo` longblob NOT NULL,
+  `photo` varchar(250) DEFAULT NULL,
   `spID` int(11) NOT NULL,
   PRIMARY KEY (`vehicleID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
@@ -152,9 +127,9 @@ CREATE TABLE IF NOT EXISTS `vehicle` (
 --
 
 INSERT INTO `vehicle` (`vehicleID`, `brand`, `model`, `year`, `capacity`, `rent_Price`, `carType`, `color`, `licensePlate`, `currentMileage`, `vehicleStatus`, `photo`, `spID`) VALUES
-(2, 'Honda', 'Accord', '2018', '5', '1500', 'sedan', 'black', 'UWH-526', '14466', 'deactivated', '', 0),
-(3, 'Toyota', 'Fortuner', '2018', '7', '3000', 'suv', 'white', 'XGT-547', '17890', 'available', '', 0),
-(4, 'Isuzu', 'Crosswind', '2018', '7', '6000', 'auv', 'gray', 'ZAC-594', '9230', 'available', '', 0);
+(2, 'Honda', 'Accord', '2018', '5', '1500', 'sedan', 'black', 'UWH-526', '14466', 'available', '', 1),
+(3, 'Toyota', 'Fortuner', '2018', '7', '3000', 'suv', 'white', 'XGT-547', '17890', 'available', '', 1),
+(4, 'Isuzu', 'Crosswind', '2018', '7', '6000', 'auv', 'gray', 'ZAC-594', '9230', 'available', '', 1);
 
 --
 -- Constraints for dumped tables
