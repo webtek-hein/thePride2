@@ -31,18 +31,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
 
-require('../../app/routes.js')(app,passport);
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-    res.redirect('/');
-}
-
-app.all('/index', isLoggedIn);
+require('../../app/routes.js')(app);
 
 module.exports = app;

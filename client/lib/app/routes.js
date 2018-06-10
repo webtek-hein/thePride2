@@ -31,30 +31,7 @@ module.exports = function (app, passport) {
         res.render('../../frontend/authenticate/views/login.ejs', { message: req.flash('loginMessage') });
     });
 
-    // ============================================================================
-    // ================================= LOGIN ====================================
-    // ============================================================================
-    app.get('/login', function (req, res) {
-        res.redirect('../../frontend/authenticate/views/login.ejs', { message: req.flash('loginMessage') });
-    })
-
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/index',
-        failureRedirect: '/index',
-        failureFlash: true
-    }),
-        function (req, res) {
-            if (req.body.remember) {
-                req.session.cookie.maxAge = 1000 * 60 * 4;
-            } else {
-                req.session.cookie.expires = false;
-            }
-
-            res.redirect('/');
-        });
-    // PROTECTED
-    // ============================================================================
-    // ============================================================================
+   
     app.get('/index', function (req, res) {
         res.render('../../frontend/general/views/index.ejs');
     });
@@ -72,8 +49,25 @@ module.exports = function (app, passport) {
         });
     });
    
-    app.get('/driverinfo', function (req, res) {
-        res.render('../../frontend/general/views/driverinfo.ejs');
+    app.get('/reservation/:vID/:uID', function (req, res) {
+        var vID = req.params.vID;
+        var uID = req.params.uID;
+        var rentStartdate = req.session.rentData.pickupDate;
+        var rentEnddate = req.session.rentData.dropOffDate;
+
+        var query = `INSERT INTO request (userID,vehicleID,requestType,status,rentStartdate,rentEnddate) 
+        values (?,?,'reservation','pending',?,?)`;
+
+        connection.query(query, [uID,vID,rentStartdate,rentEnddate], function (err, row_car_info) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.redirect('/reservation');
+            }
+        });
+    });
+    app.get('/reservation', function (req, res) {
+        res.render('../../frontend/general/views/driverinfo.ejs',{rentData: req.session.rentData});
     });
     app.get('/payment', function (req, res) {
         res.render('../../frontend/general/views/payment.ejs');
@@ -130,20 +124,15 @@ module.exports = function (app, passport) {
         var priceRange = req.body.priceRange;
         var location = req.body.location;
         var capacity = req.body.capacity;
+        var uID = 2;
         
         var rendData = {
             pickUpLocation : location,
             pickupDate : req.body.rentDate,
             dropOffDate : req.body.dropoffDate,
         }
+        req.session.rentData = rendData;
 
-
-        // var query_string = "INSERT INTO findcar (pickup_locationfc, pickup_datefc, pickup_timefc, dropoff_locationfc, dropoff_datefc, dropoff_timefc, price_rangefc) VALUES(?,?,?,?,?,?,?)"
-
-        // connection.query(query_string, [req.body.pickup_location, req.body.pickup_date, req.body.pickup_time, req.body.dropoff_location, req.body.dropoff_date, req.body.dropoff_time, req.body.price_range], function (err, rows) {
-        //     if (err) {
-        //         console.log(err);
-        //     } else {
                 var query_string = `SELECT address,firstname,lastname,vehicle.* FROM vehicle 
                     inner join user on user.user_Id = vehicle.spID
                     where vehicleStatus = 'available'
@@ -157,10 +146,8 @@ module.exports = function (app, passport) {
                     for (var i = 0; i < newCar; i++) {
                         Specs.push(pCar[i]);
                     }
-                    res.render('../../frontend/general/views/carRes.ejs', {reservation: rendData, Specs: Specs });
+                    res.render('../../frontend/general/views/carRes.ejs', {reservation: rendData, Specs: Specs,user:uID });
                 });
-            // }
-        // });
     });
 };
 
