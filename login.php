@@ -17,7 +17,22 @@ $r = $res->fetch_row();
 if($res->num_rows > 0){
     $_SESSION['username'] = $user;
     $_SESSION['userType'] = $r[2];
-    header('Location:admin/dashboard.php');
+    if($r[2] == "Admin"){
+        header('Location:admin/dashboard.php');
+    }elseif ($r[2] == "Service Provider"){
+        header('Location:localhost:8080/sp');
+    }elseif ($r[2] == "Client"){
+        header('Location:NODE');
+    }else{
+        $m = "Who Are You?!";
+        echo "
+            <script type = 'text/javascript'>
+                alert('$m');
+                window.location.replace('index.php');
+            </script>
+         ";
+    }
+
 }else{
     $m = "Wrong Credentials!";
     echo "

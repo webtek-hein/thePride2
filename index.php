@@ -61,23 +61,23 @@ if(isset($_SESSION['username'])){
                                 </p>
                                 <p>
                                     <label for="usernamesignup" class="uname" data-icon="u">Last Name</label>
-                                    <input id="usernamesignup" name="lname" required="required" type="text" placeholder="" />
+                                    <input id="usernamesignup1" name="lname" required="required" type="text" placeholder="" />
                                 </p>
                                 <p>
                                     <label for="usernamesignup" class="uname" data-icon="u">Contact No</label>
-                                    <input id="usernamesignup" name="num" required="required" type="text" placeholder="" />
+                                    <input id="usernamesignup2" name="num" required="required" type="text" placeholder="" />
                                 </p>
                                 <p>
                                     <label for="usernamesignup" class="uname" data-icon="u">Username</label>
-                                    <input id="usernamesignup" name="username" required="required" type="text" placeholder="" />
+                                    <input id="usernamesignup3" name="username" required="required" type="text" placeholder="" />
                                 </p>
                                 <p> 
                                     <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                                    <input id="passwordsignup" name="pass" required="required" type="password" placeholder=""/>
+                                    <input id="passwordsignup4" name="pass" required="required" type="password" placeholder=""/>
                                 </p>
                                 <p> 
                                     <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                                    <input id="passwordsignup_confirm" name="pass2" required="required" type="password" placeholder=""/>
+                                    <input id="passwordsignup_confirm5" name="pass2" required="required" type="password" placeholder=""/>
                                 </p>
                                 <div class="styled-select slate">
                                 <select name="type" class="form-control">
