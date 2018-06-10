@@ -11,7 +11,6 @@ if(isset($_SESSION['username'])){
         <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
         <title>Login</title>
         <link rel="shortcut icon" href="../favicon.ico">
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
         <link rel="stylesheet" type="text/css" href="css/style2.css" />
 		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
     </head>
