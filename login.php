@@ -26,7 +26,7 @@ if($res->num_rows > 0){
     }elseif ($r[2] == "Service Provider"){
         header('Location: //localhost:8080/ServiceProvider/dashboard.jsp?ayd='. $r[3]);
     }elseif ($r[2] == "Client"){
-        header('Location:NODE');
+        header('Location: //localhost:2000/index/'.$r[3]);
     }else{
         $m = "Who Are You?!";
         echo "
