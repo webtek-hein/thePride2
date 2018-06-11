@@ -44,7 +44,32 @@
             </div>
             
               <div class="box-body">
-    
+              <table id="reservationTable" class="table">
+               <thead>
+                 <th>Service Provider</th>
+                 <th>Location</th>
+                 <th>Pickup Date</th>
+                 <th>Dropoff Date</th>
+                 <th>Car</th>
+                 <th>Status</th>
+                 <th>Action</th>
+               </thead>
+               <%if(transactions){transactions.forEach(function(res){%>
+               <tr>
+                 <td><%=res.firstname%> <%=res.lastname%></td>
+                 <td><%=res.address%></td>
+                 <td><%=moment(res.rentStartdate).format('MMMM D, YYYY');%></td>
+                 <td><%=moment(res.rentEnddate).format('MMMM D, YYYY');%></td>
+                 <td><%=res.brand%> <%=res.model%></td>
+                 <td><%=res.status%></td>
+                 <td><a href="/cancel/<%=res.requestID%>" class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">Book now</a> </td>
+               </tr>
+               <%})}else{%>
+                <tr>
+                 <td>No Records found.</td>  
+               </tr>
+             <%}%>
+             </table> 
                 </div> 
               <div class="box-footer">
                 </div>  

@@ -203,7 +203,23 @@ module.exports = function (app, passport) {
 
     });
     app.get('/transactions',function(req,res){
-                res.render('../../frontend/general/views/transactions.ejs');
+        if(req.session.userData){
+        var uID = req.session.userData.user_Id;
+        var query_string = `Select request.status,request.vehicleID,request.requestID,firstname,lastname,address,model,capacity,rent_price,brand,request.* from request 
+         inner join vehicle on vehicle.vehicleID = request.vehicleID
+         inner join user on user.user_Id = vehicle.spID
+         where request.userID = ? AND request.requestType='rent' AND request.status in ('finished','cancelled')`;
+        connection.query(query_string, [uID], function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render('../../frontend/general/views/transactions.ejs',{transactions: rows, moment: moment});
+            }
+            });
+        }else{
+        res.redirect('/logout');
+    }
+
 
     });
     app.get('/logout',function(req,res){
