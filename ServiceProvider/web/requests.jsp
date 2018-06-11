@@ -101,19 +101,22 @@
                                                 Integer id =(Integer) session.getAttribute("ayd");
                                                 
 
-                                                ResultSet rs = st.executeQuery("SELECT user.firstname,brand,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " '");
-                                                if(!rs.next()){
-                                                    out.print("No Requests");
+                                                ResultSet rs = st.executeQuery("SELECT user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " '");
+                                                if(rs.next()){
+                                                    out.println("1");
+                                                    rs.beforeFirst();
+                                                        while(rs.next()){
+                                                            out.println("<tr><td>" + rs.getString("firstname"));
+                                                            out.println("</td><td>" + rs.getString("brand"));
+                                                            out.println("</td><td>" + rs.getString("model"));
+                                                            out.println("</td><td>" + rs.getString("rentStartDate"));
+                                                            out.println("</td><td>" + rs.getString("rentEnddate"));
+                                                            out.println("</td></tr>");
 
+                                                        }
                                                 }else{
-                                                    while(rs.next()){
-                                                        out.println("<tr><td>" + rs.getString("user.firstname"));
-                                                        out.println("</td><td>" + rs.getString("brand"));
-                                                        out.println("</td><td>" + rs.getString("model"));
-                                                        out.println("</td><td>" + rs.getString("rentStartDate"));
-                                                        out.println("</td><td>" + rs.getString("rentEnddate"));
-                                                        
-                                                    }
+                                                    out.println("No Requests"); 
+                                                   
                                                 }
                                             %>
                                         </tbody>
