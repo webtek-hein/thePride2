@@ -172,8 +172,9 @@ module.exports = function (app, passport) {
     });
 
     app.get('/manage',function(req,res){
+        if(req.session.userData){
         var uID = req.session.userData.user_Id;
-         var query_string = `Select request.status,request.vehicleID,request.requestID,firstname,lastname,address,model,capacity,rent_price,brand,request.* from request 
+                  var query_string = `Select request.status,request.vehicleID,request.requestID,firstname,lastname,address,model,capacity,rent_price,brand,request.* from request 
          inner join vehicle on vehicle.vehicleID = request.vehicleID
          inner join user on user.user_Id = vehicle.spID
          where request.userID = ? AND request.requestType='reservation' AND request.status in ('pending','approved')`;
@@ -195,7 +196,15 @@ module.exports = function (app, passport) {
             }
             });
             }
-        });
+        });   
+    }else{
+        res.redirect('/logout');
+    }
+
+    });
+    app.get('/transactions',function(req,res){
+                res.render('../../frontend/general/views/transactions.ejs');
+
     });
     app.get('/logout',function(req,res){
         req.session.destroy(function(err){  

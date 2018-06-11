@@ -11,12 +11,10 @@
   <link rel="stylesheet" href="/gen/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="/gen/dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
   <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
 </head>
 <body class="hold-transition skin-blue layout-top-nav">
-<div class="wrapper">
-  <header class="main-header">
+   <header class="main-header">
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -25,68 +23,40 @@
             <i class="fa fa-bars"></i>
           </button>
               <ul class="nav navbar-nav">
-            <li class="active"><a href="/index">Find Car<span class="sr-only">(current)</span></a></li>
+            <li><a href="/index">Find Car<span class="sr-only">(current)</span></a></li>
             <li><a href="/manage">Manage Reservations</a></li>
-            <li><a href="/transactions">Transactions</a></li>
-          </ul>    
-          
+            <li class="active"><a href="/transactions">Transactions</a></li>
+          </ul>      
       </div>
-       <ul class="pull-right nav navbar-nav">
+          <ul class="pull-right nav navbar-nav">
             <li><a href="/logout">Log out</a></li>
-          </ul>    
+          </ul>  
     </div>
     </nav>
   </header>
   <div class="content-wrapper">
     <div class="container">
      <section class="content-header">
-<form action="/carFind" method="POST">
         <div class="col-md-12">
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Find available cars in the market</h3>
+              <h3 class="box-title">Finished Transactions</h3>
             </div>
             
               <div class="box-body">
-                <div class="form-group row">
-                  <label form="pickup" class="col-sm-2 control-label">Location</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id="pickup_location" name="location" placeholder="Location">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label form="pickup_date" class="col-sm-2 control-label">Pickup Date</label>
-                  <div class="col-sm-3">
-                    <input required type="date" class="form-control" name="rentDate" id="pickup_date"> 
-                  </div>
-                  
-                    <label form="dropoff_date" class="col-sm-2 control-label">Dropoff date</label>
-                    <div class="col-sm-3">
-                      <input required type="date" class="form-control" name="dropoffDate" id="dropoff_date">
-                    </div>
-                  </div>
-                <div class="form-group row">
-                    <label form="dropoff_date" class="col-sm-2 control-label">Price Range</label>
-                    <div class="col-sm-3">
-                      <input required type="text" class="form-control" name="priceRange" id="priceRange">
-                    </div>  
-                    <label form="dropoff_date" class="col-sm-2 control-label">Capacity</label>
-                    <div class="col-sm-3">
-                      <input required type="text" class="form-control" name="capacity" id="cap">
-                    </div> 
-                </div>
+    
                 </div> 
               <div class="box-footer">
-                <button type="submit" class="btn btn-info">Find</button>
                 </div>  
               </div>
           </div> 
           
-          </div>   
-          </form> 
       </section>
-    </div>
-  <footer class="main-footer">
+                </div>   
+                
+            </div>
+            </div>
+<footer class="main-footer">
     <div class="container">
       <div class="pull-right hidden-xs">
         Raoul and friends.
@@ -95,7 +65,6 @@
       reserved.
     </div>
   </footer>
-</div>
 <script src="/gen/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="/gen/bootstrap/js/bootstrap.min.js"></script>
 <script src="/gen/plugins/timepicker/bootstrap-timepicker.min.js"></script>

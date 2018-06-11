@@ -25,23 +25,26 @@
               <ul class="nav navbar-nav">
             <li><a href="/index">Find Car<span class="sr-only">(current)</span></a></li>
             <li class="active"><a href="/manage">Manage Reservations</a></li>
-            <li><a href="#">Transactions</a></li>
+            <li><a href="/transactions">Transactions</a></li>
           </ul>      
       </div>
+          <ul class="pull-right nav navbar-nav">
+            <li><a href="/logout">Log out</a></li>
+          </ul>  
+    </div>
     </nav>
   </header>
   <div class="content-wrapper">
-        <div class="container">
-     
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="info-box">
-             <div class="info-box-header">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-              <h3 class="text-center">Reservations</h3>
-        </div>
+       <div class="container">
+     <section class="content-header">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Reservations</h3>
             </div>
-            <div class="info-box-content">
-             <table id="reservationTable" class="table">
+            
+              <div class="box-body">
+     <table id="reservationTable" class="table">
                <thead>
                  <th>Service Provider</th>
                  <th>Location</th>
@@ -68,19 +71,25 @@
              <%}%>
              </table> 
 
-          </div>
-          </div>
-            </div> 
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="info-box">
-            <div class="info-box-header">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-              <h3 class="text-center">Booking</h3>
-        </div>
-
+                </div> 
+              <div class="box-footer">
+                </div>  
+              </div>
+          </div> 
+          
+      </section>
+                </div>   
+                
+         <div class="container">
+     <section class="content-header">
+        <div class="col-md-12">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Booking</h3>
             </div>
-            <div class="info-box-content">
-             <table id="bookingTable" class="table">
+            
+              <div class="box-body">
+    <table id="bookingTable" class="table">
                <thead>
                  <th>Service Provider</th>
                  <th>Location</th>
@@ -102,13 +111,17 @@
                </tr>
                <%})%>
              </table> 
-
-          </div>
-          </div>
+                </div> 
+              <div class="box-footer">
+                </div>  
+              </div>
+          </div> 
+          
+      </section>
+                </div>   
+                
             </div>
-       </div>
-        </div> 
-    </div>
+            </div>
 <footer class="main-footer">
     <div class="container">
       <div class="pull-right hidden-xs">
