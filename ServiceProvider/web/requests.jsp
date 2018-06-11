@@ -54,7 +54,7 @@
                             <p>Add Car</p>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="cars.jsp">
                             <i class="material-icons">content_paste</i>
                             <p>My Cars</p>
@@ -66,7 +66,7 @@
                             <p>Logout</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="requests.jsp">
                             <i class="material-icons">content_paste</i>
                             <p>Requests</p>
@@ -87,16 +87,11 @@
                                 <div class="card-content table-responsive">
                                     <table class="table">
                                         <thead class="text-primary">
+                                            <th>Requestor</th>
                                             <th>Brand</th>
                                             <th>Model</th>
-                                            <th>Year</th>
-                                            <th>Capacity</th>
-                                            <th>Rent Price</th>
-                                            <th>Type</th>
-                                            <th>Color</th>
-                                            <th>Plate</th>
-                                            <th>Mileage</th>
-                                            <th>Status</th>
+                                            <th>Rent Start</th>
+                                            <th>Rent End</th>
                                         </thead>
                                         <tbody>
                                             <%
@@ -104,23 +99,19 @@
 
                                                 Statement st = con.createStatement();
                                                 Integer id =(Integer) session.getAttribute("ayd");
+                                                
 
-                                                ResultSet rs = st.executeQuery("SELECT * FROM vehicle JOIN user ON vehicle.spID = user.user_Id WHERE spID = '" + id + "' ");
+                                                ResultSet rs = st.executeQuery("SELECT user.firstname,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " '");
                                                 if(!rs.next()){
-                                                    out.print("Error");
+                                                    out.print("No Requests");
 
                                                 }else{
                                                     while(rs.next()){
-                                                        out.println("<tr><td>" + rs.getString("brand"));
+                                                        out.println("<tr><td>" + rs.getString("user.firstname" + "user.lastname"));
+                                                        out.println("</td><td>" + rs.getString("brand"));
                                                         out.println("</td><td>" + rs.getString("model"));
-                                                        out.println("</td><td>" + rs.getString("year"));
-                                                        out.println("</td><td>" + rs.getString("capacity"));
-                                                        out.println("</td><td>" + rs.getString("rent_Price"));
-                                                        out.println("</td><td>" + rs.getString("carType"));
-                                                        out.println("</td><td>" + rs.getString("color"));
-                                                        out.println("</td><td>" + rs.getString("licensePlate"));
-                                                        out.println("</td><td>" + rs.getString("currentMileage"));
-                                                        out.println("</td><td>" + rs.getString("vehicleStatus"));
+                                                        out.println("</td><td>" + rs.getString("rentStartDate"));
+                                                        out.println("</td><td>" + rs.getString("rentEnddate"));
                                                         
                                                     }
                                                 }

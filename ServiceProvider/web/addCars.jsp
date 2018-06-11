@@ -66,6 +66,12 @@
                             <p>Logout</p>
                         </a>
                     </li>
+                    <li>
+                        <a href="requests.jsp">
+                            <i class="material-icons">content_paste</i>
+                            <p>Requests</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -8,8 +8,9 @@
 
 <%
     
+    if(session.getAttribute("ayd") == null){
+        
     
-    if(session == null){
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/webtech","root","");
 
         Statement st = con.createStatement();
@@ -18,14 +19,13 @@
         ResultSet rs = st.executeQuery("SELECT * FROM user WHERE user_Id = '" + id + "' ");
         
         if(!rs.next()){
-
         }
         session = request.getSession();
         session.setAttribute("firstname", rs.getString("firstname"));
         session.setAttribute("ayd", id);
-    }else{
-        
     }
+    
+    
 %>
          
     
@@ -87,6 +87,12 @@
                         <a href="logout.jsp">
                             <i class="material-icons">unarchive</i>
                             <p>Logout</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="requests.jsp">
+                            <i class="material-icons">content_paste</i>
+                            <p>Requests</p>
                         </a>
                     </li>
                 </ul>
