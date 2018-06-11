@@ -101,7 +101,7 @@
                                                 Integer id =(Integer) session.getAttribute("ayd");
                                                 
 
-                                                ResultSet rs = st.executeQuery("SELECT user.firstname,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " '");
+                                                ResultSet rs = st.executeQuery("SELECT user.firstname,brand,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " '");
                                                 if(!rs.next()){
                                                     out.print("No Requests");
 
