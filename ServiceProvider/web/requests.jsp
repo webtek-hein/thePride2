@@ -82,7 +82,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="purple">
-                                    <h4 class="title">My Cars</h4>
+                                    <h4 class="title text-center">Reservation Requests</h4>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table">
@@ -102,7 +102,7 @@
                                                 Integer id =(Integer) session.getAttribute("ayd");
                                                 
 
-                                                ResultSet rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'pending'");
+                                                ResultSet rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'pending' AND request.requestType = 'reservation'");
                                                 if(rs.next()){
                                                     rs.beforeFirst();
                                                         while(rs.next()){
@@ -126,6 +126,49 @@
                         </div>
                     </div>
                 </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title text-center">Booking Requests</h4>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <th>Requestor</th>
+                                            <th>Brand</th>
+                                            <th>Model</th>
+                                            <th>Rent Start</th>
+                                            <th>Rent End</th>
+                                            <th>Options</th>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'pending' AND request.requestType = 'rent'");
+                                                if(rs.next()){
+                                                    rs.beforeFirst();
+                                                        while(rs.next()){
+                                                            out.println("<tr><td>" + rs.getString("firstname"));
+                                                            out.println("</td><td>" + rs.getString("brand"));
+                                                            out.println("</td><td>" + rs.getString("model"));
+                                                            out.println("</td><td>" + rs.getString("rentStartDate"));
+                                                            out.println("</td><td>" + rs.getString("rentEnddate"));
+                                                            out.println("</td><td>" + "<a href='accept.jsp?rid=" + rs.getInt("requestID") +    "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
+                                                            out.println("</td></tr>");
+
+                                                        }
+                                                }else{
+                                                    out.println("No Requests"); 
+                                                }
+                                            %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                        
             </div>
             
         </div>

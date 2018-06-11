@@ -20,7 +20,7 @@
      
 
      out.println("<script type=\"text/javascript\">");
-     out.println("alert('Request Rejected!!');");
+     out.println("alert('Rejected!!');");
      out.println("location='requests.jsp';");
      out.println("</script>");
    

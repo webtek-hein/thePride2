@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="91baca8f-e59d-459d-8833-066246552d58" name="Default" comment="" />
+    <list default="true" id="91baca8f-e59d-459d-8833-066246552d58" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServiceProvider/web/accept.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceProvider/web/accept.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServiceProvider/web/reject.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceProvider/web/reject.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServiceProvider/web/requests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceProvider/web/requests.jsp" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -746,11 +751,18 @@
       <option name="project" value="LOCAL" />
       <updated>1528695830075</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="SP accept,reject DONE">
+      <created>1528697485642</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1528697485642</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7312000" />
+    <option name="totallyTimeSpent" value="8442000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -806,7 +818,8 @@
     <MESSAGE value="Fixed ADMIN" />
     <MESSAGE value="asda" />
     <MESSAGE value="Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done" />
+    <MESSAGE value="SP accept,reject DONE" />
+    <option name="LAST_COMMIT_MESSAGE" value="SP accept,reject DONE" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/admin/db.php">
