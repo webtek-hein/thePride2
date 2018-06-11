@@ -151,7 +151,7 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                                rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'booking' AND request.requestType = 'rent'");
+                                                rs = st.executeQuery("SELECT request.vehicleID,requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'booking' AND request.requestType = 'rent'");
                                                 if(rs.next()){
                                                     rs.beforeFirst();
                                                         while(rs.next()){
@@ -160,13 +160,18 @@
                                                             out.println("</td><td>" + rs.getString("model"));
                                                             out.println("</td><td>" + rs.getString("rentStartDate"));
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
-                                                            out.println("</td><td>" + "<a href='acceptBooking.jsp?rid=" + rs.getInt("requestID") +    "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
+                                                            out.println("</td><td>" + "<a href='acceptBooking.jsp?rid=" + rs.getInt("requestID") + "&vID=" + rs.getInt("request.vehicleID")+ "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
                                                             out.println("</td></tr>");
-
+                                                            
+                                                            
                                                         }
+                                                        
+                                                      
                                                 }else{
                                                     out.println("No Requests"); 
                                                 }
+                                                
+
                                             %>
                                         </tbody>
                                     </table>
