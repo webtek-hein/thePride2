@@ -25,10 +25,6 @@ if(isset($_SESSION['username'])){
     </head>
     <body>
         <div class="container">
-            <header>
-                <h1>CARS <strong>2</strong> GO</span></h1>
-
-            </header>
             <br>
             <br>
             <br>
@@ -42,7 +38,7 @@ if(isset($_SESSION['username'])){
                     <div id="wrapper">
                         <div id="login" class="animate form">
                             <form  action="login.php" method="post">
-                                <h1>Log in</h1> 
+                                <h1>CARS <strong>2</strong> GO</span></h1>
                                 <p> 
                                     <label for="username" class="uname" data-icon="u" > Username </label>
                                     <input id="username" name="username" required="required" type="text" placeholder=""/>

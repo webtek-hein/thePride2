@@ -38,7 +38,7 @@
      ps.setString(7, color);
      ps.setString(8, licenseplate);
      ps.setString(9, mileage);
-     ps.setString(10, "activated");
+     ps.setString(10, "available");
      ps.setInt(11, id);
     
      ps.executeUpdate();
