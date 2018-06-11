@@ -14,20 +14,19 @@
 </head>
 <body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
-  <header class="main-header">
+<header class="main-header">
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="/" class="navbar-brand"><b>CarGo</b>CarIn</a>
+          <a href="/index" class="navbar-brand"><b>CarGo</b>CarIn</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
-          <ul class="nav navbar-nav">
-            <li ><a href="/index">Find Car<span class="sr-only">(current)</span></a></li>
-            <li><a class="active" href="/manage">Manage Reservations</a></li>
+              <ul class="nav navbar-nav">
+            <li><a href="/index">Find Car<span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="/manage">Manage Reservations</a></li>
             <li><a href="#">Transactions</a></li>
-          </ul>    
-        </div>
+          </ul>      
       </div>
     </nav>
   </header>
@@ -60,7 +59,7 @@
                  <td><%=moment(res.rentEnddate).format('MMMM D, YYYY');%></td>
                  <td><%=res.brand%> <%=res.model%></td>
                  <td><%=res.status%></td>
-                 <td><a class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">Book now</a> </td>
+                 <td><a href="/cancel/<%=res.requestID%>" class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">Book now</a> </td>
                </tr>
                <%})}else{%>
                 <tr>
@@ -99,7 +98,7 @@
                  <td><%=moment(res.rentEnddate).format('MMMM D, YYYY');%></td>
                  <td><%=res.brand%> <%=res.model%></td>
                  <td><%=res.status%></td>
-                <td><a class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">View Details</a> </td>
+                <td><a href="/cancel/<%=res.requestID%>" class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">View Details</a> </td>
                </tr>
                <%})%>
              </table> 

@@ -159,6 +159,18 @@ module.exports = function (app, passport) {
 
     });
 
+    app.get('/cancel/:reqID',function(req,res){
+        var requestID = req.params.reqID;
+        var query_string = `UPDATE request SET status='cancelled' WHERE request.requestID = ? `;
+        connection.query(query_string, [requestID], function (err, rows) {
+            if(err) console.log(err);
+            else{
+                res.redirect('/manage');
+            }
+        });
+
+    });
+
     app.get('/manage',function(req,res){
         var uID = req.session.userData.user_Id;
          var query_string = `Select request.status,request.vehicleID,request.requestID,firstname,lastname,address,model,capacity,rent_price,brand,request.* from request 
