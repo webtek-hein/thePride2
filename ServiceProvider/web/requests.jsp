@@ -107,7 +107,7 @@
 
                                                 }else{
                                                     while(rs.next()){
-                                                        out.println("<tr><td>" + rs.getString("user.firstname" + "user.lastname"));
+                                                        out.println("<tr><td>" + rs.getString("user.firstname");
                                                         out.println("</td><td>" + rs.getString("brand"));
                                                         out.println("</td><td>" + rs.getString("model"));
                                                         out.println("</td><td>" + rs.getString("rentStartDate"));
