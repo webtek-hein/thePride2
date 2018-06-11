@@ -146,8 +146,8 @@ if($_SESSION['userType'] != 'Admin' ){
 
                                     while ($row = $res->fetch_assoc()){
                                         echo "<tr><td>" . $row['username']  ."</td>" .
-                                            "<td>" . $row['first_Name'] . ' ' . $row['last_Name']  ."</td>" .
-                                            "<td>" . $row['acc_Type']  ."</td>".
+                                            "<td>" . $row['firstname'] . ' ' . $row['lastname']  ."</td>" .
+                                            "<td>" . $row['acctype']  ."</td>".
                                             "<td>" . $row['contact_No']  ."</td>" .
                                             "<td>" . $row['address']  ."</td>";
                                         echo "<td>" . "<a href=" . 'accept.php?num=' . $row['user_Id'] . "  " . " class='material-icons' >Accept</a>" . ' &nbsp ' .  "<a href=" . 'reject.php?num=' . $row['user_Id'] . "  " . " class='material-icons' >Reject</a>";
@@ -183,8 +183,8 @@ if($_SESSION['userType'] != 'Admin' ){
 
                                     while ($row = $res->fetch_assoc()){
                                         echo "<tr><td>" . $row['username']  ."</td>" .
-                                            "<td>" . $row['first_Name'] . ' ' . $row['last_Name']  ."</td>" .
-                                            "<td>" . $row['acc_Type']  ."</td>".
+                                            "<td>" . $row['firstname'] . ' ' . $row['lastname']  ."</td>" .
+                                            "<td>" . $row['acctype']  ."</td>".
                                             "<td>" . $row['contact_No']  ."</td>" .
                                             "<td>" . $row['address']  ."</td>";
                                         echo "<td>" . "<a href=" . 'deactivate.php?num=' . $row['user_Id'] . "  " . " class='material-icons' >Deactivate</a>";
@@ -199,7 +199,7 @@ if($_SESSION['userType'] != 'Admin' ){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header text-center">
-                                <h2>Denied Users</h2>
+                                <h2>Inactive Users</h2>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-striped">
@@ -220,8 +220,8 @@ if($_SESSION['userType'] != 'Admin' ){
 
                                     while ($row = $res->fetch_assoc()){
                                         echo "<tr><td>" . $row['username']  ."</td>" .
-                                            "<td>" . $row['first_Name'] . ' ' . $row['last_Name']  ."</td>" .
-                                            "<td>" . $row['acc_Type']  ."</td>".
+                                            "<td>" . $row['firstname'] . ' ' . $row['lastname']  ."</td>" .
+                                            "<td>" . $row['acctype']  ."</td>".
                                             "<td>" . $row['contact_No']  ."</td>" .
                                             "<td>" . $row['address']  ."</td>";
                                         echo "<td>" . "<a href=" . 'activate.php?num=' . $row['user_Id'] . "  " . " class='material-icons' >Activate</a>";

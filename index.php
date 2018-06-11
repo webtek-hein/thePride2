@@ -73,9 +73,19 @@ if(isset($_SESSION['username'])){
                                     <input id="usernamesignup1" name="lname" required="required" type="text" placeholder="" />
                                 </p>
                                 <p>
+                                    <label for="usernamesignup" class="uname" data-icon="u">Address</label>
+                                    <input id="usernamesignup2" name="addr" required="required" type="text" placeholder="" />
+                                </p>
+                                <p>
                                     <label for="usernamesignup" class="uname" data-icon="u">Contact No</label>
                                     <input id="usernamesignup2" name="num" required="required" type="text" placeholder="" />
                                 </p>
+                                <div class="styled-select slate">
+                                    <select name="type" class="form-control">
+                                        <option value="Service Provider">Service Provider</option>
+                                        <option value="Client">Client</option>
+                                    </select>
+                                </div>
                                 <p>
                                     <label for="usernamesignup" class="uname" data-icon="u">Username</label>
                                     <input id="usernamesignup3" name="username" required="required" type="text" placeholder="" />
@@ -88,12 +98,8 @@ if(isset($_SESSION['username'])){
                                     <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
                                     <input id="passwordsignup_confirm5" name="pass2" required="required" type="password" placeholder=""/>
                                 </p>
-                                <div class="styled-select slate">
-                                <select name="type" class="form-control">
-                                    <option value="Service Provider">Service Provider</option>
-                                    <option value="Client">Client</option>
-                                </select>
-                                </div>
+
+
                                 <p class="signin button"> 
 									<input type="submit" id="sub" value="Sign up"/>
 								</p>
