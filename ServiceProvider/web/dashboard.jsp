@@ -95,6 +95,12 @@
                             <p>Requests</p>
                         </a>
                     </li>
+                    <li>
+                        <a href="transactions.jsp">
+                            <i class="material-icons">content_paste</i>
+                            <p>Transactions</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -66,13 +66,13 @@
                             <p>Logout</p>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="requests.jsp">
                             <i class="material-icons">content_paste</i>
                             <p>Requests</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="transactions.jsp">
                             <i class="material-icons">content_paste</i>
                             <p>Transactions</p>
@@ -88,7 +88,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="purple">
-                                    <h4 class="title text-center">Reservation Requests</h4>
+                                    <h4 class="title text-center">On-going Transactions</h4>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table">
@@ -102,13 +102,12 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/webtech","root","");
+                                                
+                                                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/webtech","root","");
 
                                                 Statement st = con.createStatement();
                                                 Integer id =(Integer) session.getAttribute("ayd");
-                                                
-
-                                                ResultSet rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'pending' AND request.requestType = 'reservation'");
+                                                ResultSet rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'booked' AND request.requestType = 'rent'");
                                                 if(rs.next()){
                                                     rs.beforeFirst();
                                                         while(rs.next()){
@@ -117,12 +116,12 @@
                                                             out.println("</td><td>" + rs.getString("model"));
                                                             out.println("</td><td>" + rs.getString("rentStartDate"));
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
-                                                            out.println("</td><td>" + "<a href='accept.jsp?rid=" + rs.getInt("requestID") +    "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
+                                                            out.println("</td><td>" + "<a href='finishBooking.jsp?rid=" + rs.getInt("requestID") +    "' class='btn btn-success'>Finish</a><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'>Cancel</a>");
                                                             out.println("</td></tr>");
 
                                                         }
                                                 }else{
-                                                    out.println("No Requests"); 
+                                                    out.println("No Transaction/s"); 
                                                 }
                                             %>
                                         </tbody>
@@ -137,7 +136,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="purple">
-                                    <h4 class="title text-center">Booking Requests</h4>
+                                    <h4 class="title text-center">Finished Transactions</h4>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table">
@@ -147,11 +146,11 @@
                                             <th>Model</th>
                                             <th>Rent Start</th>
                                             <th>Rent End</th>
-                                            <th>Options</th>
                                         </thead>
                                         <tbody>
                                             <%
-                                                rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'booking' AND request.requestType = 'rent'");
+                                                
+                                                  rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'finished' AND request.requestType = 'rent'");
                                                 if(rs.next()){
                                                     rs.beforeFirst();
                                                         while(rs.next()){
@@ -160,12 +159,12 @@
                                                             out.println("</td><td>" + rs.getString("model"));
                                                             out.println("</td><td>" + rs.getString("rentStartDate"));
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
-                                                            out.println("</td><td>" + "<a href='acceptBooking.jsp?rid=" + rs.getInt("requestID") +    "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
+                                                            
                                                             out.println("</td></tr>");
 
                                                         }
                                                 }else{
-                                                    out.println("No Requests"); 
+                                                    out.println("No Transaction/s"); 
                                                 }
                                             %>
                                         </tbody>
@@ -174,7 +173,50 @@
                             </div>
                         </div>
                     </div>
-                </div>                        
+                </div>  
+                                        <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title text-center">Cancelled Transactions</h4>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <th>Requestor</th>
+                                            <th>Brand</th>
+                                            <th>Model</th>
+                                            <th>Rent Start</th>
+                                            <th>Rent End</th>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                
+                                                  rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'cancelled' AND request.requestType = 'rent'");
+                                                if(rs.next()){
+                                                    rs.beforeFirst();
+                                                        while(rs.next()){
+                                                            out.println("<tr><td>" + rs.getString("firstname"));
+                                                            out.println("</td><td>" + rs.getString("brand"));
+                                                            out.println("</td><td>" + rs.getString("model"));
+                                                            out.println("</td><td>" + rs.getString("rentStartDate"));
+                                                            out.println("</td><td>" + rs.getString("rentEnddate"));
+                                                            
+                                                            out.println("</td></tr>");
+
+                                                        }
+                                                }else{
+                                                    out.println("No Transaction/s"); 
+                                                }
+                                            %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
             </div>
             
         </div>
