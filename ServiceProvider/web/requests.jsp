@@ -92,6 +92,7 @@
                                             <th>Model</th>
                                             <th>Rent Start</th>
                                             <th>Rent End</th>
+                                            <th>Options</th>
                                         </thead>
                                         <tbody>
                                             <%
@@ -101,9 +102,8 @@
                                                 Integer id =(Integer) session.getAttribute("ayd");
                                                 
 
-                                                ResultSet rs = st.executeQuery("SELECT user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " '");
+                                                ResultSet rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'pending'");
                                                 if(rs.next()){
-                                                    out.println("1");
                                                     rs.beforeFirst();
                                                         while(rs.next()){
                                                             out.println("<tr><td>" + rs.getString("firstname"));
@@ -111,12 +111,12 @@
                                                             out.println("</td><td>" + rs.getString("model"));
                                                             out.println("</td><td>" + rs.getString("rentStartDate"));
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
+                                                            out.println("</td><td>" + "<a href='accept.jsp?rid=" + rs.getInt("requestID") +    "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
                                                             out.println("</td></tr>");
 
                                                         }
                                                 }else{
                                                     out.println("No Requests"); 
-                                                   
                                                 }
                                             %>
                                         </tbody>
