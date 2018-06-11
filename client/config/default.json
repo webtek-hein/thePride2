@@ -16,5 +16,8 @@
     },
     "cookie": {
         "secret": "cookie"
+    },
+    "main": {
+        "url": "http://localhost/thePride2/logout"
     }
 }

@@ -3,6 +3,8 @@
 const express = require('express');
 const dbconfig = require('../database/database');
 const bodyParser = require('body-parser');
+const config = require('config');
+
 
 const formidable = require('formidable');
 
@@ -31,13 +33,41 @@ module.exports = function (app, passport) {
         res.render('../../frontend/authenticate/views/login.ejs', { message: req.flash('loginMessage') });
     });
 
-   
+   app.get('/index/:uID',function(req,res) {
+        var session = req.session;
+        var uID = req.params.uID;
+        if(session.userData){
+            res.redirect('/index');
+        }else{
+            var query = "SELECT user_Id,firstname,lastname FROM user where user_Id = ? AND status = 'activated'";
+
+        connection.query(query, [uID], function (err, userData) {
+            if (err) {
+                console.log(err);
+            } else {
+                session.userData = userData[0];
+                res.redirect('/index');
+            }
+        });
+        }
+       
+
+
+   });
     app.get('/index', function (req, res) {
-        res.render('../../frontend/general/views/index.ejs');
+        var userData = req.session.userData;
+        if(!userData){
+            res.redirect('/logout');
+        }else{
+            res.render('../../frontend/general/views/index.ejs');
+        }
     });
      app.get('/carRes', function (req, res) {
         var car_id = req.query.carid;
-
+        var userData = req.session.userData;
+        if(!userData){
+            res.redirect('/logout');
+        }else{
         var query = "SELECT * FROM findcar ";
 
         connection.query(query, [car_id], function (err, row_car_info) {
@@ -47,6 +77,8 @@ module.exports = function (app, passport) {
                 res.render('/carFind', { car_info: row_car_info[0] });
             }
         });
+        }
+   
     });
    
     app.get('/reservation/:vID/:uID', function (req, res) {
@@ -54,8 +86,11 @@ module.exports = function (app, passport) {
         var uID = req.params.uID;
         var rentStartdate = req.session.rentData.pickupDate;
         var rentEnddate = req.session.rentData.dropOffDate;
-
-        var query = `INSERT INTO request (userID,vehicleID,requestType,status,rentStartdate,rentEnddate) 
+          var userData = req.session.userData;
+        if(!userData){
+            res.redirect('/logout');
+        }else{
+          var query = `INSERT INTO request (userID,vehicleID,requestType,status,rentStartdate,rentEnddate) 
         values (?,?,'reservation','pending',?,?)`;
 
         connection.query(query, [uID,vID,rentStartdate,rentEnddate], function (err, row_car_info) {
@@ -64,10 +99,18 @@ module.exports = function (app, passport) {
             } else {
                 res.redirect('/reservation');
             }
-        });
+        });  
+        }
+
+        
     });
     app.get('/reservation', function (req, res) {
-        res.render('../../frontend/general/views/driverinfo.ejs',{rentData: req.session.rentData});
+          var userData = req.session.userData;
+        if(!userData){
+            res.redirect('/logout');
+        }else{
+            res.render('../../frontend/general/views/driverinfo.ejs',{rentData: req.session.rentData});
+        }
     });
     app.get('/payment', function (req, res) {
         res.render('../../frontend/general/views/payment.ejs');
@@ -80,6 +123,18 @@ module.exports = function (app, passport) {
         res.render('../../frontend/general/views/register.ejs');
     });
 
+    app.get('/logout',function(req,res){
+        req.session.destroy(function(err){  
+        if(err){  
+            console.log(err);  
+        }  
+        else  
+        {  
+            res.redirect(config.get('main.url'));  
+        }  
+    });  
+
+    });
     app.post('/newClient', function (req, res) {
 
         console.log(req.body.first_Name);
@@ -120,11 +175,14 @@ module.exports = function (app, passport) {
 
 
     app.post('/carFind', function (req, res) {
-
+        var userData = req.session.userData;
+        if(!userData){
+            res.redirect('/logout');
+        }else{
         var priceRange = req.body.priceRange;
         var location = req.body.location;
         var capacity = req.body.capacity;
-        var uID = 2;
+        var uID = userData.user_Id;
         
         var rendData = {
             pickUpLocation : location,
@@ -147,7 +205,9 @@ module.exports = function (app, passport) {
                         Specs.push(pCar[i]);
                     }
                     res.render('../../frontend/general/views/carRes.ejs', {reservation: rendData, Specs: Specs,user:uID });
-                });
+                });  
+        }
+      
     });
 };
 
