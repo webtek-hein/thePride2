@@ -17,6 +17,6 @@
         "secret": "cookie"
     },
     "main": {
-        "url": "http://localhost/thePride2/logout"
+        "url": "http://localhost/fam/logout"
     }
 }
