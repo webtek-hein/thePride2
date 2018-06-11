@@ -22,76 +22,57 @@
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
+
         </div>
       </div>
     </nav>
   </header>
   <div class="content-wrapper">
-    <div class="container">
-     <section class="content-header">
-      <div class="col-md-5 col-sm-6 col-xs-12">
+     <% if(Specs.length !== 0){
+            Specs.forEach(function(specs){ %>
+  <div class="container">
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="info-box">
             <div class="info-box-content">
               <span class="info-box-number">Pickup: </span> <br>
-              <span class="info-box-text">Location: </span><br>
-              <span class="info-box-text">Date: </span><br>
-              <span class="info-box-text">Time: </span><br>
+              <span class="info-box-text">Location: <%= specs.address %> </span><br>
+              <span class="info-box-text">Pickup Date: <%=moment(specs.rentStartdate).format('MMMM D, YYYY');%> </span><br>
+              <span class="info-box-text">Dropoff Date:<%=moment(specs.rentEnddate).format('MMMM D, YYYY');%> </span><br>
             </div>
           </div>
         </div>
-          <div class="col-md-5 col-sm-6 col-xs-12">
+      </div>
+        <div class="container">
+         
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="info-box">
             <div class="info-box-content">
-              <span class="info-box-number">Dropoff: </span> <br>
-              <span class="info-box-text">Location: </span><br>
-              <span class="info-box-text">Date: </span><br>
-              <span class="info-box-text">Time: </span><br>
+              <h1> <%=specs.brand%> <%=specs.model%> </h1> 
+              <img src="/gen/images/car1.jpg" alt="car" height="150" width="250">
+              <h4> Vehicle Information </h4> 
+              <p class="">Owner: <%=specs.firstname%> <%=specs.lastname%></p>
+              <p class="">Year: <%=specs.year%></p>
+              <p class="">Capacity: <%=specs.capacity%></p> 
+              <p class="">Price: <%=specs.rent_Price%></p>
+              <span class="">Car type: <%=specs.carType%></span> <br>
+              <%if(specs.status === 'approved'){%>
+              <span class="info-box-text"><a href="/bookRes/<%=specs.requestID%>"><button class="btn btn-success">Book Now</button></a></span>
+              <%}else if(specs.status === 'booking'){%>
+              <h3 class="">Booked. Please wait for the confirmation of the owner.</h3>
+              <%}else if(specs.status === 'booked'){%>
+              <h3 class="">Your good to go.</h3>
+              <%}else{%>
+              <h3 class="">Request Pending. Please wait for the owner to accept your request.</h3>
+              <%}%>
+
           </div>
           </div>
-          </div>
-        </div>
-        <div class="col-md-9">
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Contact Details</h3>
-            </div>
-            
-            <form method="POST" action="/contact">
-              <div class="box-body">                
-                <div class="form-group">
-                  <label for="inputfirstname3" class="col-sm-2 control-label">First Name</label>
-                  <div class="col-sm-4">
-                    <input type="firstname" class="form-control" id="firstname" name="firstname" placeholder="First Name">
-                  </div>
-                  <label for="inputlastname3" class="col-sm-2 control-label">Last Name</label>
-                  <div class="col-sm-4">
-                    <input type="lastname" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
-                  </div>
-                </div> 
-                 <div class="form-group">
-                  <label for="inputemail3" class="col-sm-2 control-label">Email</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control" id="info_email" name="info_email" placeholder="Email">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputnumber3" class="col-sm-2 control-label">Mobile Number</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control" id="mobileNo" name="mobileNo" placeholder="Mobile Number">
-                  </div>
-                </div>
-                  <div class="col-md-9">
-              <div class="box-footer">
-                <button type="submit" class="btn btn-info">Book now</button>
-              </div>
-                  </div>
-              </div>
-            </form>
-          </div>     
-      </section>
+            </div> 
+       </div>
+          <%})}%>
+        </div> 
     </div>
-  </div>
-  <footer class="main-footer">
+<footer class="main-footer">
     <div class="container">
       <div class="pull-right hidden-xs">
         Raoul and friends.

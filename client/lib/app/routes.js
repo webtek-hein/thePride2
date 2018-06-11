@@ -14,6 +14,8 @@ const str = require('string');
 const StringBuilder = require('string-builder')
 const app = express();
 
+const moment = require('moment');
+
 const appRoot = require('app-root-path');
 
 app.use(bodyParser.urlencoded({
@@ -97,6 +99,8 @@ module.exports = function (app, passport) {
             if (err) {
                 console.log(err);
             } else {
+                req.session.vehicle = vID;
+                req.session.request = row_car_info.insertId;
                 res.redirect('/reservation');
             }
         });  
@@ -104,12 +108,32 @@ module.exports = function (app, passport) {
 
         
     });
+    app.get('/book/:vID/:reqID',function(req,res){
+        req.session.vehicle = req.params.vID;
+        req.session.request = req.params.reqID;
+        res.redirect('/reservation');
+    });
     app.get('/reservation', function (req, res) {
-          var userData = req.session.userData;
+        var userData = req.session.userData;
+        var vID = req.session.vehicle;
+        var req = req.session.request;
         if(!userData){
             res.redirect('/logout');
         }else{
-            res.render('../../frontend/general/views/driverinfo.ejs',{rentData: req.session.rentData});
+        var query_string = `SELECT request.requestID,rentStartdate,rentEnddate,request.status,address,firstname,lastname,vehicle.* FROM vehicle 
+                    inner join user on user.user_Id = vehicle.spID
+                    inner join request on request.vehicleID = vehicle.vehicleID
+                    where request.vehicleID = ? AND request.requestID = ?`;
+                connection.query(query_string,[vID,req], function (err, pCar) {
+                    if (err) console.log(err);
+
+                    var newCar = pCar.length;
+                    var Specs = [];
+                    for (var i = 0; i < newCar; i++) {
+                        Specs.push(pCar[i]);
+                    }
+                    res.render('../../frontend/general/views/driverinfo.ejs', {Specs: Specs,user:userData.user_Id, moment: moment});
+                });  
         }
     });
     app.get('/payment', function (req, res) {
@@ -123,6 +147,44 @@ module.exports = function (app, passport) {
         res.render('../../frontend/general/views/register.ejs');
     });
 
+    app.get('/bookRes/:reqID',function(req,res){
+        var reqID = req.params.reqID;
+        var query_string = `UPDATE request SET requestType = 'rent', status='booking' WHERE request.requestID = ? `;
+        connection.query(query_string, [reqID], function (err, rows) {
+            if(err) console.log(err);
+            else{
+                res.redirect('/manage');
+            }
+        });
+
+    });
+
+    app.get('/manage',function(req,res){
+        var uID = req.session.userData.user_Id;
+         var query_string = `Select request.status,request.vehicleID,request.requestID,firstname,lastname,address,model,capacity,rent_price,brand,request.* from request 
+         inner join vehicle on vehicle.vehicleID = request.vehicleID
+         inner join user on user.user_Id = vehicle.spID
+         where request.userID = ? AND request.requestType='reservation' AND request.status in ('pending','approved')`;
+        connection.query(query_string, [uID], function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+               var reservations = rows;
+        query_string = `Select request.status,request.vehicleID,request.requestID,firstname,lastname,address,model,capacity,rent_price,brand,request.* from request 
+         inner join vehicle on vehicle.vehicleID = request.vehicleID
+         inner join user on user.user_Id = vehicle.spID
+         where request.userID = ? AND request.requestType='rent' AND request.status in ('booking','booked')`;
+        connection.query(query_string, [uID], function (err, rows) {
+            if (err) {
+                console.log(err);
+            } else {
+                var booking =  rows;
+                res.render('../../frontend/general/views/reservation.ejs',{booking: booking, reservations: reservations, moment: moment});
+            }
+            });
+            }
+        });
+    });
     app.get('/logout',function(req,res){
         req.session.destroy(function(err){  
         if(err){  
@@ -172,6 +234,9 @@ module.exports = function (app, passport) {
         res.render('../../frontend/general/views/payment.ejs');
         });
     });
+     app.post('/contact', function (req, res){
+  
+    });
 
 
     app.post('/carFind', function (req, res) {
@@ -184,12 +249,12 @@ module.exports = function (app, passport) {
         var capacity = req.body.capacity;
         var uID = userData.user_Id;
         
-        var rendData = {
+        var rentData = {
             pickUpLocation : location,
             pickupDate : req.body.rentDate,
             dropOffDate : req.body.dropoffDate,
         }
-        req.session.rentData = rendData;
+        req.session.rentData = rentData;
 
                 var query_string = `SELECT address,firstname,lastname,vehicle.* FROM vehicle 
                     inner join user on user.user_Id = vehicle.spID
@@ -204,13 +269,9 @@ module.exports = function (app, passport) {
                     for (var i = 0; i < newCar; i++) {
                         Specs.push(pCar[i]);
                     }
-                    res.render('../../frontend/general/views/carRes.ejs', {reservation: rendData, Specs: Specs,user:uID });
+                    res.render('../../frontend/general/views/carRes.ejs', {reservation: rentData, Specs: Specs,user:uID });
                 });  
         }
       
     });
 };
-
-
-// query 1 "SELECT * user_credential uc JOIN user_profile up on uc.sg_email = up.email WHERE(SE) ";
-

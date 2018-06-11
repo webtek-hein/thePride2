@@ -8,8 +8,7 @@
         "logger_format": "combined"
     },
     "mysql": {
-        "timezone": "+08:00",
-        "host": "localhost",
+        "host": "127.0.0.1",
         "user": "root",
         "password": "",
         "database": "webtech"

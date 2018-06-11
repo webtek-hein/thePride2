@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Drivers' Info | CarGo CarIn</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="/gen/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/gen/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/gen/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="/gen/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/gen/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand"><b>CarGo</b>CarIn</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+          <ul class="nav navbar-nav">
+            <li ><a href="/index">Find Car<span class="sr-only">(current)</span></a></li>
+            <li><a class="active" href="/manage">Manage Reservations</a></li>
+            <li><a href="#">Transactions</a></li>
+          </ul>    
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="content-wrapper">
+        <div class="container">
+     
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="info-box">
+             <div class="info-box-header">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+              <h3 class="text-center">Reservations</h3>
+        </div>
+            </div>
+            <div class="info-box-content">
+             <table id="reservationTable" class="table">
+               <thead>
+                 <th>Service Provider</th>
+                 <th>Location</th>
+                 <th>Pickup Date</th>
+                 <th>Dropoff Date</th>
+                 <th>Car</th>
+                 <th>Status</th>
+                 <th>Action</th>
+               </thead>
+               <%if(reservations){reservations.forEach(function(res){%>
+               <tr>
+                 <td><%=res.firstname%> <%=res.lastname%></td>
+                 <td><%=res.address%></td>
+                 <td><%=moment(res.rentStartdate).format('MMMM D, YYYY');%></td>
+                 <td><%=moment(res.rentEnddate).format('MMMM D, YYYY');%></td>
+                 <td><%=res.brand%> <%=res.model%></td>
+                 <td><%=res.status%></td>
+                 <td><a class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">Book now</a> </td>
+               </tr>
+               <%})}else{%>
+                <tr>
+                 <td>No Records found.</td>  
+               </tr>
+             <%}%>
+             </table> 
+
+          </div>
+          </div>
+            </div> 
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="info-box">
+            <div class="info-box-header">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+              <h3 class="text-center">Booking</h3>
+        </div>
+
+            </div>
+            <div class="info-box-content">
+             <table id="bookingTable" class="table">
+               <thead>
+                 <th>Service Provider</th>
+                 <th>Location</th>
+                 <th>Pickup Date</th>
+                 <th>Dropoff Date</th>
+                 <th>Car</th>
+                 <th>Status</th>
+                 <th>Action</th>
+               </thead>
+               <%booking.forEach(function(res){%>
+               <tr>
+                 <td><%=res.firstname%> <%=res.lastname%></td>
+                 <td><%=res.address%></td>
+                 <td><%=moment(res.rentStartdate).format('MMMM D, YYYY');%></td>
+                 <td><%=moment(res.rentEnddate).format('MMMM D, YYYY');%></td>
+                 <td><%=res.brand%> <%=res.model%></td>
+                 <td><%=res.status%></td>
+                <td><a class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">View Details</a> </td>
+               </tr>
+               <%})%>
+             </table> 
+
+          </div>
+          </div>
+            </div>
+       </div>
+        </div> 
+    </div>
+<footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        Raoul and friends.
+      </div>
+      <strong>Copyright &copy; 2018 Group 3.</strong> All rights
+      reserved.
+    </div>
+  </footer>
+</div>
+<script src="/gen/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/gen/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/gen/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/gen/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="/gen/dist/js/adminlte.min.js"></script>
+<script src="/gen/dist/js/demo.js"></script>
+</body>
+</html>
