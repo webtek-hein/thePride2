@@ -17,6 +17,6 @@
         "secret": "cookie"
     },
     "main": {
-        "url": "http://localhost/fam/logout"
+        "url": "http://localhost/webtech/logout"
     }
 }
