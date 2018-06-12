@@ -10,21 +10,8 @@ $num = $_POST['num'];
 $type = $_POST['type'];
 $user = $_POST['username'];
 
-$sql = "SELECT username FROM user";
-
-$t = $conn->query($sql);
-    while ($row = $t->fetch_assoc()) {
-          if($row['username'] == $user){
-              $m = "Username, Already Exist!";
-              echo "
-                <script type = 'text/javascript'>
-                    alert('$m');
-                    window.location.replace('index.php');
-                </script>
-             ";
-          }
-    }
-
+$sql = "SELECT username FROM user WHERE username = '$user'";
+$res = $conn->query($sql);
 
 $pass = $_POST['pass'];
 if ($_POST['pass'] != $_POST['pass2']) {
@@ -35,7 +22,15 @@ if ($_POST['pass'] != $_POST['pass2']) {
                 window.location.replace('index.php#toregister');
             </script>
          ";
-} else {
+} elseif ($res->num_rows > 0){
+    $m = "Username already exist!";
+    echo "
+            <script type = 'text/javascript'>
+                alert('$m');
+                window.location.replace('index.php#toregister');
+            </script>
+         ";
+}else {
     $sql = "INSERT INTO user(firstname,lastname,address,contact_No,acctype,username,password,status) VALUES 
                 ('$fname','$lname','$addr','$num','$type','$user','$pass','pending')";
 

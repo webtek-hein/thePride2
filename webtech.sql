@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 10, 2018 at 11:11 AM
--- Server version: 5.7.21
--- PHP Version: 5.6.35
+-- Generation Time: Jun 12, 2018 at 05:22 PM
+-- Server version: 5.7.19
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,15 +42,7 @@ CREATE TABLE IF NOT EXISTS `request` (
   PRIMARY KEY (`requestID`),
   KEY `vehicle_Id` (`vehicleID`) USING BTREE,
   KEY `user_Id` (`userID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `request`
---
-
-INSERT INTO `request` (`requestID`, `userID`, `vehicleID`, `requestType`, `status`, `rentStartdate`, `rentEnddate`) VALUES
-(3, 3, 3, 'rent', 'approved', '0000-00-00', '0000-00-00'),
-(4, 4, 2, 'rent', 'approved', '0000-00-00', '0000-00-00');
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -61,13 +53,13 @@ INSERT INTO `request` (`requestID`, `userID`, `vehicleID`, `requestType`, `statu
 DROP TABLE IF EXISTS `transaction`;
 CREATE TABLE IF NOT EXISTS `transaction` (
   `trans_Id` int(11) NOT NULL AUTO_INCREMENT,
-  `requestID` int(11) NOT NULL,
-  `amount` int(50) NOT NULL,
-  `paymentMode` varchar(50) NOT NULL,
-  `status` varchar(50) NOT NULL,
-  PRIMARY KEY (`trans_Id`),
-  KEY `request_Id` (`requestID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `spID` int(50) NOT NULL,
+  `clientID` int(10) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  `vehicleID` int(10) NOT NULL,
+  `requestID` int(44) NOT NULL,
+  PRIMARY KEY (`trans_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -87,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL,
   PRIMARY KEY (`user_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
@@ -117,29 +109,9 @@ CREATE TABLE IF NOT EXISTS `vehicle` (
   `licensePlate` varchar(50) NOT NULL,
   `currentMileage` varchar(50) NOT NULL,
   `vehicleStatus` varchar(45) NOT NULL DEFAULT 'undefined',
-  `photo` varchar(250) DEFAULT NULL,
   `spID` int(11) NOT NULL,
   PRIMARY KEY (`vehicleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `vehicle`
---
-
-INSERT INTO `vehicle` (`vehicleID`, `brand`, `model`, `year`, `capacity`, `rent_Price`, `carType`, `color`, `licensePlate`, `currentMileage`, `vehicleStatus`, `photo`, `spID`) VALUES
-(2, 'Honda', 'Accord', '2018', '5', '1500', 'sedan', 'black', 'UWH-526', '14466', 'available', '', 1),
-(3, 'Toyota', 'Fortuner', '2018', '7', '3000', 'suv', 'white', 'XGT-547', '17890', 'available', '', 1),
-(4, 'Isuzu', 'Crosswind', '2018', '7', '6000', 'auv', 'gray', 'ZAC-594', '9230', 'available', '', 1);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `transaction`
---
-ALTER TABLE `transaction`
-  ADD CONSTRAINT `t_requestID` FOREIGN KEY (`requestID`) REFERENCES `request` (`requestID`) ON DELETE CASCADE ON UPDATE CASCADE;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
