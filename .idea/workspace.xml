@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91baca8f-e59d-459d-8833-066246552d58" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9a4c038c-c729-49b5-9a67-cc0608f4e696.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ServiceProvider/web/logout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceProvider/web/logout.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServiceProvider/web/addCars.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceProvider/web/addCars.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServiceProvider/web/cars.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceProvider/web/cars.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ServiceProvider/web/requests.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceProvider/web/requests.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/directaccess.php" beforeDir="false" afterPath="$PROJECT_DIR$/directaccess.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServiceProvider/web/transactions.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceProvider/web/transactions.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -176,7 +174,7 @@
       <updated>1528586383402</updated>
       <workItem from="1528586405961" duration="1257000" />
       <workItem from="1528809967195" duration="10589000" />
-      <workItem from="1528827674032" duration="1465000" />
+      <workItem from="1528827674032" duration="2211000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed ADMIN">
       <created>1528687810905</created>
@@ -318,15 +316,21 @@
       <option name="project" value="LOCAL" />
       <updated>1528826597368</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Cup Cake">
+      <created>1528829539407</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1528829539407</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30258000" />
+    <option name="totallyTimeSpent" value="31004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25718608" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -374,7 +378,8 @@
     <MESSAGE value="Potato" />
     <MESSAGE value="Milkshake" />
     <MESSAGE value="Butter Cake" />
-    <option name="LAST_COMMIT_MESSAGE" value="Butter Cake" />
+    <MESSAGE value="Cup Cake" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cup Cake" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/login.php">
