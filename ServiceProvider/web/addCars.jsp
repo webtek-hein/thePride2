@@ -153,6 +153,17 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating">
+                                                    <h1>Select Image</h1>
+                                                    <input required type="file" name="image" class="form-control" size="50">
+                                                    <br><br>
+                                                    <input type = "submit" value = "Upload File" />
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
                                         
                                         <button type="submit" class="btn btn-primary pull-right">Add Car</button>
                                         <div class="clearfix"></div>
