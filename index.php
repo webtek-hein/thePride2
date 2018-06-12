@@ -5,11 +5,9 @@ if(isset($_SESSION['username'])){
     if($_SESSION['userType'] == "Admin"){
         header('Location:admin/dashboard.php');
     }elseif ($_SESSION['userType'] == "Service Provider"){
-        header('Location: //localhost:8080/ServiceProvider/requests.jsp?ayd=' . $user_id);
+        header('Location: //localhost:8080/ServiceProvider/requests.jsp');
     }elseif ($_SESSION['userType'] == "Client"){
-        header('Location: //localhost:2000/index/' . $user_id);
-    }else{
-
+        header('Location: //localhost:2000/index');
     }
 }
 ?>

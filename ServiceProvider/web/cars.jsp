@@ -4,6 +4,33 @@
          Class.forName("com.mysql.jdbc.Driver");  
 %> 
 
+<%
+    
+    if(request.getParameter("ayd") != null){
+        if(session.getAttribute("ayd") == null){
+
+            try{
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/webtech","root","");
+            Statement st = con.createStatement();
+            int id = Integer.parseInt(request.getParameter("ayd"));
+            ResultSet rs = st.executeQuery("SELECT * FROM user WHERE user_Id = '" + id + "' ");
+
+            if(!rs.next()){
+                }
+                session = request.getSession();
+                session.setAttribute("firstname", rs.getString("firstname"));
+                session.setAttribute("ayd", id);
+            }catch(Exception e){
+                System.out.println("Error " + e.toString());
+            }
+        }
+    }else if((session.getAttribute("ayd") != null) && (request.getParameter("ayd") == null)){
+        //Do nothing
+    }else{
+        response.sendRedirect("http://localhost/webtech/directaccess.php");
+    }
+    
+%>
 
 <!doctype html>
 <html lang="en">
