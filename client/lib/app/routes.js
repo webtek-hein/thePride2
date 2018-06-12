@@ -205,10 +205,10 @@ module.exports = function (app, passport) {
     app.get('/transactions',function(req,res){
         if(req.session.userData){
         var uID = req.session.userData.user_Id;
-        var query_string = `Select request.status,request.vehicleID,request.requestID,firstname,lastname,address,model,capacity,rent_price,brand,request.* from request 
+        var query_string = `Select requestType,request.status,request.vehicleID,request.requestID,firstname,lastname,address,model,capacity,rent_price,brand,request.* from request 
          inner join vehicle on vehicle.vehicleID = request.vehicleID
          inner join user on user.user_Id = vehicle.spID
-         where request.userID = ? AND request.requestType='rent' AND request.status in ('finished','cancelled')`;
+         where request.userID = ? AND request.status in ('finished','cancelled','rejected')`;
         connection.query(query_string, [uID], function (err, rows) {
             if (err) {
                 console.log(err);
@@ -297,8 +297,9 @@ module.exports = function (app, passport) {
                     inner join user on user.user_Id = vehicle.spID
                     where vehicleStatus = 'available'
                     AND address = ? AND capacity <= ?
-                    AND rent_Price <= ?`;
-                connection.query(query_string,[location,capacity,priceRange], function (err, pCar) {
+                    AND rent_Price <= ?
+                    AND vehicleID not in (SELECT vehicleID from request where userID = ?)`;
+                connection.query(query_string,[location,capacity,priceRange,uID], function (err, pCar) {
 
                     var newCar = pCar.length;
                     var Specs = [];

@@ -51,6 +51,7 @@
                  <th>Pickup Date</th>
                  <th>Dropoff Date</th>
                  <th>Car</th>
+                 <th>Transaction</th>
                  <th>Status</th>
                </thead>
                <%if(transactions){transactions.forEach(function(res){%>
@@ -60,6 +61,7 @@
                  <td><%=moment(res.rentStartdate).format('MMMM D, YYYY');%></td>
                  <td><%=moment(res.rentEnddate).format('MMMM D, YYYY');%></td>
                  <td><%=res.brand%> <%=res.model%></td>
+                 <td><%=res.requestType%></td>
                  <td><%=res.status%></td>
                </tr>
                <%})}else{%>
