@@ -18,6 +18,32 @@
      ps = con.prepareStatement(queryString);
      ps.executeUpdate();
      
+     
+     int vid = Integer.parseInt(request.getParameter("vID"));
+     String queryString2 = "UPDATE vehicle SET vehicleStatus = 'available' WHERE vehicleID = '" + vid + " '";
+    
+     
+     ps = null;
+     ps = con.prepareStatement(queryString2);
+     ps.executeUpdate();
+     
+     
+     session = request.getSession();
+     Integer ayd =(Integer) session.getAttribute("ayd");
+     int uid = Integer.parseInt(request.getParameter("uID"));
+     
+     String q = "INSERT INTO transaction(spID,clientID,status,vehicleID,requestID) VALUES(?,?,?,?,?)";
+     
+     ps = null;
+     ps = con.prepareStatement(q);
+     ps.setInt(1, ayd);
+     ps.setInt(2, uid);
+     ps.setString(3, "Canceled");
+     ps.setInt(4, vid);
+     ps.setInt(5, rid);
+    
+     ps.executeUpdate();
+     
 
      out.println("<script type=\"text/javascript\">");
      out.println("alert('Cancelled!!');");

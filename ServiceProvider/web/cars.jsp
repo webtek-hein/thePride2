@@ -42,10 +42,10 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li>
-                        <a href="dashboard.jsp">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
+                    <li >
+                        <a href="requests.jsp">
+                            <i class="material-icons">content_paste</i>
+                            <p>Requests</p>
                         </a>
                     </li>
                     <li >
@@ -60,24 +60,20 @@
                             <p>My Cars</p>
                         </a>
                     </li>
-                    <li class="active-pro footer">
-                        <a href="logout.jsp">
-                            <i class="material-icons">unarchive</i>
-                            <p>Logout</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="requests.jsp">
-                            <i class="material-icons">content_paste</i>
-                            <p>Requests</p>
-                        </a>
-                    </li>
                     <li>
                         <a href="transactions.jsp">
                             <i class="material-icons">content_paste</i>
                             <p>Transactions</p>
                         </a>
                     </li>
+                    <li class="active-pro footer">
+                        <a href="logout.jsp">
+                            <i class="material-icons">unarchive</i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
+                    
+                    
                 </ul>
             </div>
         </div>

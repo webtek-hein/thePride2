@@ -26,7 +26,7 @@ if($res->num_rows > 0){
         if ($r[2] == "Admin") {
             header('Location:admin/dashboard.php');
         } elseif ($r[2] == "Service Provider") {
-            header('Location: //localhost:8080/ServiceProvider/dashboard.jsp?ayd=' . $r[3]);
+            header('Location: //localhost:8080/ServiceProvider/requests.jsp?ayd=' . $r[3]);
         } elseif ($r[2] == "Client") {
             header('Location: //localhost:2000/index/' . $r[3]);
         } else {

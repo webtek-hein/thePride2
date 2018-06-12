@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="webtech@localhost" uuid="9a4c038c-c729-49b5-9a67-cc0608f4e696">
+    <data-source name="webtech@localhost [2]" uuid="d9b5710c-7327-4241-8d8d-b646a6e05db7">
       <database-info product="MySQL" version="5.7.19" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-schemas>*:information_schema</introspection-schemas>
+      <introspection-schemas>*:webtech</introspection-schemas>
     </data-source>
   </component>
 </project>

@@ -182,7 +182,7 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
+                                        <i class="ti-calendar"></i>
                                     </div>
                                 </div>
                             </div>

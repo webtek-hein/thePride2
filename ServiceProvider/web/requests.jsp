@@ -2,7 +2,29 @@
 
 <%
          Class.forName("com.mysql.jdbc.Driver");  
-%> 
+%>         
+
+<%
+    
+    if(session.getAttribute("ayd") == null){
+        
+    
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/webtech","root","");
+
+        Statement st = con.createStatement();
+        int id = Integer.parseInt(request.getParameter("ayd"));
+
+        ResultSet rs = st.executeQuery("SELECT * FROM user WHERE user_Id = '" + id + "' ");
+        
+        if(!rs.next()){
+        }
+        session = request.getSession();
+        session.setAttribute("firstname", rs.getString("firstname"));
+        session.setAttribute("ayd", id);
+    }
+    
+    
+%>
 
 
 <!doctype html>
@@ -42,10 +64,10 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li>
-                        <a href="dashboard.jsp">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
+                    <li class="active">
+                        <a href="requests.jsp">
+                            <i class="material-icons">content_paste</i>
+                            <p>Requests</p>
                         </a>
                     </li>
                     <li >
@@ -60,24 +82,20 @@
                             <p>My Cars</p>
                         </a>
                     </li>
-                    <li class="active-pro footer">
-                        <a href="logout.jsp">
-                            <i class="material-icons">unarchive</i>
-                            <p>Logout</p>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="requests.jsp">
-                            <i class="material-icons">content_paste</i>
-                            <p>Requests</p>
-                        </a>
-                    </li>
                     <li>
                         <a href="transactions.jsp">
                             <i class="material-icons">content_paste</i>
                             <p>Transactions</p>
                         </a>
                     </li>
+                    <li class="active-pro footer">
+                        <a href="logout.jsp">
+                            <i class="material-icons">unarchive</i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -119,7 +137,6 @@
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
                                                             out.println("</td><td>" + "<a href='accept.jsp?rid=" + rs.getInt("requestID") +    "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
                                                             out.println("</td></tr>");
-
                                                         }
                                                 }else{
                                                     out.println("No Requests"); 

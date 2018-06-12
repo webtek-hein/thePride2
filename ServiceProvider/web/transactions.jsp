@@ -43,9 +43,9 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
-                        <a href="dashboard.jsp">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
+                        <a href="requests.jsp">
+                            <i class="material-icons">content_paste</i>
+                            <p>Requests</p>
                         </a>
                     </li>
                     <li >
@@ -60,24 +60,20 @@
                             <p>My Cars</p>
                         </a>
                     </li>
-                    <li class="active-pro footer">
-                        <a href="logout.jsp">
-                            <i class="material-icons">unarchive</i>
-                            <p>Logout</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="requests.jsp">
-                            <i class="material-icons">content_paste</i>
-                            <p>Requests</p>
-                        </a>
-                    </li>
                     <li class="active">
                         <a href="transactions.jsp">
                             <i class="material-icons">content_paste</i>
                             <p>Transactions</p>
                         </a>
                     </li>
+                    <li class="active-pro footer">
+                        <a href="logout.jsp">
+                            <i class="material-icons">unarchive</i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -98,6 +94,7 @@
                                             <th>Model</th>
                                             <th>Rent Start</th>
                                             <th>Rent End</th>
+                                            <th>Rent Price</th>
                                             <th>Options</th>
                                         </thead>
                                         <tbody>
@@ -107,7 +104,7 @@
 
                                                 Statement st = con.createStatement();
                                                 Integer id =(Integer) session.getAttribute("ayd");
-                                                ResultSet rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'booked' AND request.requestType = 'rent'");
+                                                ResultSet rs = st.executeQuery("SELECT request.vehicleID,requestID,user.firstname,brand,model,user.lastname,user.user_Id,request.*,rentStartdate,rentEnddate,rent_Price FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'booked' AND request.requestType = 'rent'");
                                                 if(rs.next()){
                                                     rs.beforeFirst();
                                                         while(rs.next()){
@@ -116,7 +113,8 @@
                                                             out.println("</td><td>" + rs.getString("model"));
                                                             out.println("</td><td>" + rs.getString("rentStartDate"));
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
-                                                            out.println("</td><td>" + "<a href='finishBooking.jsp?rid=" + rs.getInt("requestID") +    "' class='btn btn-success'>Finish</a><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'>Cancel</a>");
+                                                            out.println("</td><td>" + rs.getString("rent_Price"));
+                                                            out.println("</td><td>" + "<a href='finishBooking.jsp?rid=" + rs.getInt("requestID") + "&vID=" + rs.getInt("request.vehicleID")+ "&uID=" + rs.getInt("user.user_Id")+  "' class='btn btn-success'>Finish</a><a href='cancelBooking.jsp?rid=" + rs.getInt("requestID") +  "&vID=" + rs.getInt("request.vehicleID")+ "&uID=" + rs.getInt("user.user_Id")+ "' class='btn btn-success'>Cancel</a>");
                                                             out.println("</td></tr>");
 
                                                         }
@@ -146,11 +144,12 @@
                                             <th>Model</th>
                                             <th>Rent Start</th>
                                             <th>Rent End</th>
+                                            <th>Rent Price</th>
                                         </thead>
                                         <tbody>
                                             <%
                                                 
-                                                  rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'finished' AND request.requestType = 'rent'");
+                                                  rs = st.executeQuery("SELECT rent_Price,requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'finished' AND request.requestType = 'rent'");
                                                 if(rs.next()){
                                                     rs.beforeFirst();
                                                         while(rs.next()){
@@ -159,7 +158,7 @@
                                                             out.println("</td><td>" + rs.getString("model"));
                                                             out.println("</td><td>" + rs.getString("rentStartDate"));
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
-                                                            
+                                                            out.println("</td><td>" + rs.getString("rent_Price"));
                                                             out.println("</td></tr>");
 
                                                         }
@@ -179,7 +178,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="purple">
-                                    <h4 class="title text-center">Cancelled Transactions</h4>
+                                    <h4 class="title text-center">Canceled Transactions</h4>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table">
@@ -189,11 +188,12 @@
                                             <th>Model</th>
                                             <th>Rent Start</th>
                                             <th>Rent End</th>
+                                            <th>Rent Price</th>
                                         </thead>
                                         <tbody>
                                             <%
                                                 
-                                                  rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'cancelled' AND request.requestType = 'rent'");
+                                                  rs = st.executeQuery("SELECT rent_Price,requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'cancelled' AND request.requestType = 'rent'");
                                                 if(rs.next()){
                                                     rs.beforeFirst();
                                                         while(rs.next()){
@@ -202,7 +202,7 @@
                                                             out.println("</td><td>" + rs.getString("model"));
                                                             out.println("</td><td>" + rs.getString("rentStartDate"));
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
-                                                            
+                                                            out.println("</td><td>" + rs.getString("rent_Price"));
                                                             out.println("</td></tr>");
 
                                                         }

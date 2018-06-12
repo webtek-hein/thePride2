@@ -234,8 +234,6 @@ if($_SESSION['userType'] != 'Admin' ){
                         </div>
                     </div>
 
-
-
                 </div>
             </div>
         </div>

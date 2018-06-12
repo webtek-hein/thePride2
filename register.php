@@ -11,6 +11,7 @@ $type = $_POST['type'];
 $user = $_POST['username'];
 
 $sql = "SELECT username FROM user";
+
 $t = $conn->query($sql);
     while ($row = $t->fetch_assoc()) {
           if($row['username'] == $user){

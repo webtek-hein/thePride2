@@ -131,24 +131,37 @@ if($_SESSION['userType'] != 'Admin' ){
                                 <table class="table table-striped">
                                     <thead>
                                     <th>Transaction ID</th>
-                                    <th>Request ID</th>
-                                    <th>Amount</th>
-                                    <th>Payment Type</th>
+                                    <th>Service Provider</th>
+                                    <th>Client</th>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                    <th>Rent Price</th>
+                                    <th>License Plate</th>
+                                    <th>Rent Start</th>
+                                    <th>Rent End</th>
                                     <th>Status</th>
                                     </thead>
                                     <tbody>
                                     <?php
                                     require 'db.php';
 
-                                    $sql = "SELECT * FROM transaction";
+                                    $sql = "SELECT rentStartdate,rentEnddate,clientID,trans_Id,firstname,brand,model,rent_Price,licensePlate,transaction.status AS a FROM transaction JOIN user ON transaction.spID = user.user_Id JOIN vehicle ON transaction.vehicleID = vehicle.vehicleID JOIN request ON transaction.requestID = request.requestID";
                                     $res = $conn->query($sql);
-
                                     while ($row = $res->fetch_assoc()){
+                                        $sql = "SELECT firstname AS b FROM user WHERE user_Id = '" . $row['clientID'] ."'";
+                                        $b = $conn->query($sql);
+                                        $bb = $b->fetch_row();
                                         echo "<tr><td>" . $row['trans_Id']  ."</td>" .
-                                            "<td>" . $row['request_Id'] ."</td>" .
-                                            "<td>" . $row['amount']  ."</td>".
-                                            "<td>" . $row['mode_Of_Payment']  ."</td>" .
-                                            "<td>" . $row['status']  ."</td>";
+                                            "<td>" . $row['firstname'] ."</td>" .
+                                            "<td>" . $bb[0] ."</td>" .
+                                            "<td>" . $row['brand']  ."</td>".
+                                            "<td>" . $row['model']  ."</td>" .
+                                            "<td>" . $row['rent_Price']  ."</td>" .
+                                            "<td>" . $row['licensePlate']  ."</td>" .
+                                            "<td>" . $row['rentStartdate']  ."</td>" .
+                                            "<td>" . $row['rentEnddate']  ."</td>" .
+                                            "<td>" . $row['a']  ."</td></tr>";
+
                                         }
                                     ?>
                                     </tbody>
