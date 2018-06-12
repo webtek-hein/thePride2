@@ -301,12 +301,13 @@ module.exports = function (app, passport) {
                     where vehicleStatus = 'available'
                     AND address = ? AND capacity <= ?
                     AND rent_Price <= ?
-                    AND vehicleID not in (SELECT vehicleID from request where userID = ?)`;
+                    AND vehicleID not in (SELECT vehicleID from request where userID = ? AND 
+                    status not in ('finished','cancelled','rejected'))`;
                 connection.query(query_string,[location,capacity,priceRange,uID], function (err, pCar) {
 
                     var newCar = pCar.length;
                     var Specs = [];
-
+                    if (err) console.log(err);
                     for (var i = 0; i < newCar; i++) {
                         Specs.push(pCar[i]);
                     }

@@ -1,6 +1,5 @@
 <?php
 session_start();
-$user_id = $SESSION['id'];
 if(isset($_SESSION['username'])){
     if($_SESSION['userType'] == "Admin"){
         header('Location:admin/dashboard.php');
