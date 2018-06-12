@@ -32,8 +32,11 @@ module.exports = function (app, passport) {
     // =============================== HOME PAGE ==================================
     // ============================================================================
     app.get('/', function (req, res) {
-        res.render('../../frontend/authenticate/views/login.ejs', { message: req.flash('loginMessage') });
+        res.redirect('/login');
     });
+    app.get('/login',function(req,res){
+        res.redirect(config.get('main.login'));
+    })
 
    app.get('/index/:uID',function(req,res) {
         var session = req.session;
@@ -59,7 +62,7 @@ module.exports = function (app, passport) {
     app.get('/index', function (req, res) {
         var userData = req.session.userData;
         if(!userData){
-            res.redirect('/logout');
+            res.redirect('/login');
         }else{
             res.render('../../frontend/general/views/index.ejs');
         }
@@ -68,7 +71,7 @@ module.exports = function (app, passport) {
         var car_id = req.query.carid;
         var userData = req.session.userData;
         if(!userData){
-            res.redirect('/logout');
+            res.redirect('/login');
         }else{
         var query = "SELECT * FROM findcar ";
 
@@ -90,7 +93,7 @@ module.exports = function (app, passport) {
         var rentEnddate = req.session.rentData.dropOffDate;
           var userData = req.session.userData;
         if(!userData){
-            res.redirect('/logout');
+            res.redirect('/login');
         }else{
           var query = `INSERT INTO request (userID,vehicleID,requestType,status,rentStartdate,rentEnddate) 
         values (?,?,'reservation','pending',?,?)`;
@@ -118,7 +121,7 @@ module.exports = function (app, passport) {
         var vID = req.session.vehicle;
         var req = req.session.request;
         if(!userData){
-            res.redirect('/logout');
+            res.redirect('/login');
         }else{
         var query_string = `SELECT request.requestID,rentStartdate,rentEnddate,request.status,address,firstname,lastname,vehicle.* FROM vehicle 
                     inner join user on user.user_Id = vehicle.spID
@@ -198,7 +201,7 @@ module.exports = function (app, passport) {
             }
         });   
     }else{
-        res.redirect('/logout');
+        res.redirect(config.get('main.login'));
     }
 
     });
@@ -217,7 +220,7 @@ module.exports = function (app, passport) {
             }
             });
         }else{
-        res.redirect('/logout');
+        res.redirect('/login');
     }
 
 
@@ -279,7 +282,7 @@ module.exports = function (app, passport) {
     app.post('/carFind', function (req, res) {
         var userData = req.session.userData;
         if(!userData){
-            res.redirect('/logout');
+            res.redirect('/login');
         }else{
         var priceRange = req.body.priceRange;
         var location = req.body.location;
