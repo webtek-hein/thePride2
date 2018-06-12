@@ -4,7 +4,7 @@
     
     
     
-    response.sendRedirect("http://localhost/fam/logout.php");
+    response.sendRedirect("http://localhost/webtech/logout.php");
    
     
         

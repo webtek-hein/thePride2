@@ -8,7 +8,7 @@
     
     if(session.getAttribute("ayd") == null){
         
-    
+        try{
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/webtech","root","");
 
         Statement st = con.createStatement();
@@ -17,10 +17,13 @@
         ResultSet rs = st.executeQuery("SELECT * FROM user WHERE user_Id = '" + id + "' ");
         
         if(!rs.next()){
+            }
+            session = request.getSession();
+            session.setAttribute("firstname", rs.getString("firstname"));
+            session.setAttribute("ayd", id);
+        }catch(Exception e){
+            System.out.println("Error " + e.toString());
         }
-        session = request.getSession();
-        session.setAttribute("firstname", rs.getString("firstname"));
-        session.setAttribute("ayd", id);
     }
     
     

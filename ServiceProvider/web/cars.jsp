@@ -112,6 +112,7 @@
                                                     out.print("Error");
 
                                                 }else{
+                                                    rs.beforeFirst();
                                                     while(rs.next()){
                                                         out.println("<tr><td>" + rs.getString("brand"));
                                                         out.println("</td><td>" + rs.getString("model"));
