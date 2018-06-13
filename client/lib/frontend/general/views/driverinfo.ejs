@@ -70,6 +70,8 @@
               <h3 class="text-success">Booked</h3>
               <%}else if(specs.status === 'finished'){%>
               <h3 class="text-success">Transaction Finished. <a href="/transactions">View Transaction</a></h3>
+              <%}else if(specs.status === 'rejected'){%>
+              <h3 class="text-danger">Your request has been rejected. <a href="/transactions">View Transaction</a></h3>
               <%}else{%>
               <h3 class="">Request Pending. Please wait for the owner to accept your request.</h3>
               <%}%>
