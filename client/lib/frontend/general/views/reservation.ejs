@@ -62,7 +62,7 @@
                  <td><%=moment(res.rentEnddate).format('MMMM D, YYYY');%></td>
                  <td><%=res.brand%> <%=res.model%></td>
                  <td><%=res.status%></td>
-                 <td><a href="/cancel/<%=res.requestID%>" class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">Book now</a> </td>
+                 <td><a href="/cancel/<%=res.requestID%>/<%=res.vehicleID%>" class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">Book now</a> </td>
                </tr>
                <%})}else{%>
                 <tr>
@@ -107,7 +107,7 @@
                  <td><%=moment(res.rentEnddate).format('MMMM D, YYYY');%></td>
                  <td><%=res.brand%> <%=res.model%></td>
                  <td><%=res.status%></td>
-                <td><a href="/cancel/<%=res.requestID%>" class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">View Details</a> </td>
+                <td><a href="/cancel/<%=res.requestID%>/<%=res.vehicleID%>" class="btn btn-sm btn-primary">Cancel</a> <a href="/book/<%=res.vehicleID%>/<%=res.requestID%>" class="btn btn-sm btn-success">View Details</a> </td>
                </tr>
                <%})%>
              </table> 

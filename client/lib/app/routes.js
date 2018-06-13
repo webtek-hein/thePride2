@@ -162,13 +162,20 @@ module.exports = function (app, passport) {
 
     });
 
-    app.get('/cancel/:reqID',function(req,res){
+    app.get('/cancel/:reqID/:vehicleID',function(req,res){
         var requestID = req.params.reqID;
+        var vehicleID = req.params.vehicleID;
         var query_string = `UPDATE request SET status='cancelled' WHERE request.requestID = ? `;
         connection.query(query_string, [requestID], function (err, rows) {
             if(err) console.log(err);
             else{
-                res.redirect('/manage');
+                 var query_string = `UPDATE vehicle SET vehicleStatus='available' WHERE vehicleID = ? `;
+                 connection.query(query_string, [vehicleID], function (err, rows) {
+                    if(err) console.log(err);
+                    else{
+                    res.redirect('/manage');
+                    }
+                });
             }
         });
 
@@ -211,7 +218,8 @@ module.exports = function (app, passport) {
         var query_string = `Select requestType,request.status,request.vehicleID,request.requestID,firstname,lastname,address,model,capacity,rent_price,brand,request.* from request 
          inner join vehicle on vehicle.vehicleID = request.vehicleID
          inner join user on user.user_Id = vehicle.spID
-         where request.userID = ? AND request.status in ('finished','cancelled','rejected')`;
+         where request.userID = ? AND request.status in ('finished','cancelled','rejected')
+         Order by request.requestID DESC`;
         connection.query(query_string, [uID], function (err, rows) {
             if (err) {
                 console.log(err);
