@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.*" %>
 <%
-   int id = Integer.parseInt(request.getParameter("rid"));
+    int id = Integer.parseInt(request.getParameter("rid"));
    
    
        
@@ -11,7 +11,7 @@
             "root", "");
 
 
-     String queryString = "UPDATE request SET status = 'cancelled' WHERE requestID = '" + id + " '";
+     String queryString = "UPDATE request SET status = 'canceled' WHERE requestID = '" + id + " '";
     
      
      PreparedStatement ps = null;
@@ -40,7 +40,7 @@
      ps.setInt(2, uid);
      ps.setString(3, "Canceled");
      ps.setInt(4, vid);
-     ps.setInt(5, rid);
+     ps.setInt(5, id);
     
      ps.executeUpdate();
      

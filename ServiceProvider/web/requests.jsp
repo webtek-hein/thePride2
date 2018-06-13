@@ -27,7 +27,7 @@
     }else if((session.getAttribute("ayd") != null) && (request.getParameter("ayd") == null)){
         //Do nothing
     }else{
-        response.sendRedirect("http://localhost/webtech");
+        response.sendRedirect("http://localhost/webtech/directaccess.php");
     }
     
 %>
@@ -132,7 +132,7 @@
                                                 Integer id =(Integer) session.getAttribute("ayd");
                                                 
 
-                                                ResultSet rs = st.executeQuery("SELECT requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'pending' AND request.requestType = 'reservation'");
+                                                ResultSet rs = st.executeQuery("SELECT request.vehicleID,requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'pending' AND request.requestType = 'reservation'");
                                                 if(rs.next()){
                                                     rs.beforeFirst();
                                                         while(rs.next()){
@@ -141,7 +141,7 @@
                                                             out.println("</td><td>" + rs.getString("model"));
                                                             out.println("</td><td>" + rs.getString("rentStartDate"));
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
-                                                            out.println("</td><td>" + "<a href='accept.jsp?rid=" + rs.getInt("requestID") +    "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
+                                                            out.println("</td><td>" + "<a href='accept.jsp?rid=" + rs.getInt("requestID") + "&vID=" + rs.getInt("request.vehicleID")+    "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
                                                             out.println("</td></tr>");
                                                         }
                                                 }else{
@@ -183,7 +183,7 @@
                                                             out.println("</td><td>" + rs.getString("model"));
                                                             out.println("</td><td>" + rs.getString("rentStartDate"));
                                                             out.println("</td><td>" + rs.getString("rentEnddate"));
-                                                            out.println("</td><td>" + "<a href='acceptBooking.jsp?rid=" + rs.getInt("requestID") + "&vID=" + rs.getInt("request.vehicleID")+ "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "' class='btn btn-success'><i class='material-icons'>close</i>");
+                                                            out.println("</td><td>" + "<a href='acceptBooking.jsp?rid=" + rs.getInt("requestID") + "&vID=" + rs.getInt("request.vehicleID")+ "' class='btn btn-success'><i class='material-icons'>done</i><a href='reject.jsp?rid=" + rs.getInt("requestID") + "&vID=" + rs.getInt("request.vehicleID")+ "' class='btn btn-success'><i class='material-icons'>close</i>");
                                                             out.println("</td></tr>");
                                                             
                                                             

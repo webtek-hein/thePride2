@@ -18,6 +18,12 @@
      ps = con.prepareStatement(queryString);
      ps.executeUpdate();
      
+     int vid = Integer.parseInt(request.getParameter("vID"));
+     String queryString2 = "UPDATE vehicle SET vehicleStatus = 'available' WHERE vehicleID = '" + vid + " '";
+     
+     ps = null;
+     ps = con.prepareStatement(queryString2);
+     ps.executeUpdate();
 
      out.println("<script type=\"text/javascript\">");
      out.println("alert('Rejected!!');");

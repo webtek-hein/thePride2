@@ -28,7 +28,7 @@
     }else if((session.getAttribute("ayd") != null) && (request.getParameter("ayd") == null)){
         //Do nothing
     }else{
-        response.sendRedirect("http://localhost/webtech");
+        response.sendRedirect("http://localhost/webtech/directaccess.php");
     }
     
 %>

@@ -27,7 +27,7 @@
     }else if((session.getAttribute("ayd") != null) && (request.getParameter("ayd") == null)){
         //Do nothing
     }else{
-        response.sendRedirect("http://localhost/webtech");
+        response.sendRedirect("http://localhost/webtech/directaccess.php");
     }
     
 %>
@@ -221,7 +221,7 @@
                                         <tbody>
                                             <%
                                                 
-                                                  rs = st.executeQuery("SELECT rent_Price,requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'cancelled' AND request.requestType = 'rent'");
+                                                  rs = st.executeQuery("SELECT rent_Price,requestID,user.firstname,brand,model,user.lastname,request.*,rentStartdate,rentEnddate FROM vehicle inner join request on request.vehicleID = vehicle.vehicleID inner join user on user.user_Id = request.userID WHERE spID = '" + id + " ' AND request.status = 'canceled' AND request.requestType = 'rent'");
                                                 if(rs.next()){
                                                     rs.beforeFirst();
                                                         while(rs.next()){
